@@ -1,5 +1,6 @@
 import React, { Component, SyntheticEvent } from 'react'
 import './Login.scss'
+import inventoryLogo from '../../statics/images/inventoryLogo.png'
 import { connect } from 'react-redux';
 import classnames from 'classnames'
 
@@ -71,7 +72,7 @@ class Login extends Component<any, any>{
                password:''
             }})
 
-            this.props.loginUserAction(data)
+            //this.props.loginUserAction(data)
             
             
         }
@@ -84,9 +85,13 @@ class Login extends Component<any, any>{
         
     return (
         <div className= "login container" >
+            
             <div className="logincontainer">
+            
                     <div className="center">
-                        <div className="imagecontainer">
+                    <div className="imagecontainer mb-3 text-center">
+                        <span className="display-4 mx-auto ">Inventory App</span>
+                        <img className="img-fluid" src={inventoryLogo} alt=""/>   
                         </div>
                         
                         <form onSubmit={this.onHandleLogin} className='loginForm card p-4'>
@@ -98,6 +103,7 @@ class Login extends Component<any, any>{
                                     name="login" 
                                     placeholder="username" 
                                     ref = {(input)=>{this.usernameRef=input}}
+                                    
                                     />
                                     {this.state.error.username &&
                                         <div className="invalid-feedback">
@@ -123,7 +129,7 @@ class Login extends Component<any, any>{
                                     }
                             </div>
                             
-                            <button  type="submit" className="btn btn-block btn-primary" >Log In</button>
+                            <button  type="submit" className="btn btn-block btn-warning" >Log In</button>
                         </form>
                         
                     </div>

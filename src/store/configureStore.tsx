@@ -3,12 +3,11 @@ import reduxThunk from "redux-thunk"
 import rootReducer from '../reducers';
 import logger from 'redux-logger'
 
-export let store;
 //THIS RUNS ONLY ONCE WHE THE COMPONENTS ARE MOUNTED ???
 const configureStore = () => {
   //declare a saga middleware for handle the async call to the API
 
-  store = 
+  let store = 
     createStore(rootReducer,
       compose(
         applyMiddleware(reduxThunk,logger),
