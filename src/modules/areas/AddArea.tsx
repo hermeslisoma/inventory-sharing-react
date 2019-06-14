@@ -16,8 +16,8 @@ export class AddArea extends Component<any,any> {
 
 
     }
-    addInventory = ()=>{
-        let inventory = {
+    addArea = ()=>{
+        let area = {
             title:this.titleRef.value,
             description:this.descriptionRef.value,
         }
@@ -36,7 +36,7 @@ export class AddArea extends Component<any,any> {
           <Modal isOpen={this.state.modal} fade={false} toggle={this.toggle} className={this.props.className}>
             <ModalHeader toggle={this.toggle}>Create an Area</ModalHeader>
             <ModalBody>
-                <form  onSubmit={this.addInventory} className=''>
+                <form  onSubmit={this.addArea} className=''>
                     <div className="form-group">
                         <input 
                             type="text" 

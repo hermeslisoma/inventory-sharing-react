@@ -11,10 +11,10 @@ export default class Areas extends Component {
             <div className='container Areas-container mt-5'>
                 <div className="header d-flex flex-row">
                     <p className="display-4">Books Inventory</p>
-                    <AddArea className="modalAddInventory" buttonLabel='Add Area' />
+                    <AddArea className="modalAddArea" buttonLabel='Add Area' />
                 </div>
                 
-                <div className="inventories-container p-3">
+                <div className="areas-container p-3">
                     <div className="card card-container">
                         <div className="card-body">
                             <h5 className="card-title">Bed roomBookShelf Area</h5>

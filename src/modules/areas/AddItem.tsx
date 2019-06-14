@@ -16,10 +16,9 @@ export class AddItem extends Component<any,any> {
 
 
     }
-    addInventory = ()=>{
-        let inventory = {
+    addItem = ()=>{
+        let area = {
             title:this.titleRef.value,
-            description:this.descriptionRef.value,
         }
 
     }
@@ -36,7 +35,7 @@ export class AddItem extends Component<any,any> {
           <Modal isOpen={this.state.modal} fade={false} toggle={this.toggle} className={this.props.className}>
             <ModalHeader toggle={this.toggle}>Create an Item</ModalHeader>
             <ModalBody>
-                <form  onSubmit={this.addInventory} className=''>
+                <form  onSubmit={this.addItem} className=''>
                     <div className="form-group">
                         <input 
                             type="text" 
