@@ -23,7 +23,7 @@ import { connect } from 'react-redux';
     render() {
         return (
             <>
-                <i onClick={this.toggle} className="fas fa-trash-alt"></i>
+                <i onClick={this.toggle} className="fas fa-trash-alt ml-3 text-danger"></i>
                 <Modal isOpen={this.state.modal} fade={false} toggle={this.toggle} className={this.props.className}>
             <ModalHeader toggle={this.toggle}>Delete Item</ModalHeader>
             <ModalBody>

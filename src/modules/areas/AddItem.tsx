@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Button, Modal, ModalHeader, ModalBody } from 'reactstrap';
 import { connect } from 'react-redux';
+import './Areas.scss'
 
 export class AddItem extends Component<any,any> {
     state = {
@@ -31,7 +32,7 @@ export class AddItem extends Component<any,any> {
         return (
             <div className='AddItem-container'>
             
-          <Button className='btn btn-secondary text-white' onClick={this.toggle}>{this.props.buttonLabel}</Button>
+          <Button className='btn btn-success text-white button-add' onClick={this.toggle}><span className="button-content">+</span></Button>
           <Modal isOpen={this.state.modal} fade={false} toggle={this.toggle} className={this.props.className}>
             <ModalHeader toggle={this.toggle}>Create an Item</ModalHeader>
             <ModalBody>

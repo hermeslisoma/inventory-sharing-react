@@ -88,10 +88,10 @@ class Login extends Component<any, any>{
             
             <div className="logincontainer">
             
-                    <div className="center">
-                    <div className="imagecontainer mb-3 text-center">
-                        <span className="display-4 mx-auto ">Inventory App</span>
-                        <img className="img-fluid" src={inventoryLogo} alt=""/>   
+                    <div className="center text-center">
+                    <span className="display-4 mx-auto ">Inventory App</span>
+                        <div className="imagecontainer mb-3 ">
+                            <img className="img-fluid" src={inventoryLogo} alt=""/>   
                         </div>
                         
                         <form onSubmit={this.onHandleLogin} className='loginForm card p-4'>

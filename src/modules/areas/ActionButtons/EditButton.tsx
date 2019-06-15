@@ -28,7 +28,7 @@ class EditButton extends Component<any,any> {
     render() {
         return (
             <div >
-            <i className="fas fa-edit" onClick={this.toggle}></i>
+            <i className="fas fa-edit text-warning" onClick={this.toggle}></i>
           <Modal isOpen={this.state.modal} fade={false} toggle={this.toggle} className={this.props.className}>
             <ModalHeader toggle={this.toggle}>Edit Item</ModalHeader>
             <ModalBody>

@@ -2,7 +2,7 @@ import axios from 'axios';
 import { url } from './apiUrl';
 import {LoginUser} from './models/loginModel';
 
-export class BaseService {
+export class BaseService<T> {
   url: string = url;
   constructor(route: string) {
     this.url += route;
@@ -23,7 +23,7 @@ export class BaseService {
     return login;
   }
   
-  Get(id:number){
+  Get= (id:number)=>{
      return axios.get(`${this.url}/${id}`, {headers: this.getHeaders()})
                   .then(resp => {
                     return resp.data;
@@ -31,7 +31,7 @@ export class BaseService {
                     return error.response.data
                   });
    }
-  GetAll(){
+  GetAll=()=>{
     return axios.get(`${this.url}`, {headers: this.getHeaders()})
                  .then(resp => {
                    return resp.data;
@@ -48,9 +48,19 @@ export class BaseService {
                     return error.response
                 });
   }
-  Update = (id:number,user)=>{
-    console.log('inside the service update url::',`${this.url}/${id}`,user)
-    return axios.patch(`${this.url}/${id}`,user, {headers: this.getHeaders()})
+  Update = (id:number,T)=>{
+    console.log('inside the service update url::',`${this.url}/${id}`,T)
+    return axios.patch(`${this.url}/${id}`,T, {headers: this.getHeaders()})
+                .then(resp => {
+                  return resp;
+                }).catch(error => {
+                  return error.response
+                });
+  }
+  
+  Create = (T)=>{
+    console.log('inside the service create url::',`${this.url}`,T)
+    return axios.patch(`${this.url}`,T, {headers: this.getHeaders()})
                 .then(resp => {
                   return resp;
                 }).catch(error => {

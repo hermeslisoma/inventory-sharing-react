@@ -17,18 +17,106 @@ export default class Areas extends Component {
                 </div>
                 
                 <div className="areas-container p-3">
-                    <div className="card card-container">
+                    <div className="card card-container ">
+                        <div className="card-header d-flex pt-3">
+                            <h5 className="card-title mr-auto ">Bed roomBookShelf Area</h5> 
+                            <AddItem className="modalAddInventory" />
+                        </div>
                         <div className="card-body">
-                            <h5 className="card-title">Bed roomBookShelf Area</h5>
-                                <ul>
-                                <li className="card-text d-flex" value="List of books">Book <div className="ml-auto d-flex"><EditButton/><DeleteButton/></div></li>
-                                <li className="card-text d-flex" value="List of books">Book <div className="m1-auto d-flex"><EditButton/><DeleteButton/></div></li>
-                                <li className="card-text d-flex" value="List of books">Book <div className="m1-auto d-flex"><EditButton/><DeleteButton/></div></li>
-                                <li className="card-text d-flex" value="List of books">Book <div className="m1-auto d-flex"><EditButton/><DeleteButton/></div></li>
-                                <li className="card-text d-flex" value="List of books">Book <div className="m1-auto d-flex"><EditButton/><DeleteButton/></div></li>
-                                </ul>
+                                <div className="item">
+                                    <div className="d-flex align-items-center ">
+                                        Java core 
+                                        <div className="ml-auto d-flex align-items-center my-3">
+                                            <EditButton/><DeleteButton />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="item">
+                                    <div className="d-flex align-items-center ">
+                                        Spring for dummies
+                                        <div className="ml-auto d-flex align-items-center my-3">
+                                            <EditButton/><DeleteButton />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="item">
+                                    <div className="d-flex align-items-center ">
+                                        React forever
+                                        <div className="ml-auto d-flex align-items-center my-3">
+                                            <EditButton/><DeleteButton />
+                                        </div>
+                                    </div>
+                                </div>
 
-                            <Link to="#" ><AddItem className="modalAddInventory" buttonLabel='AddItem' /></Link>
+                            
+                        </div>
+                    </div>
+                    <div className="card card-container ">
+                        <div className="card-header d-flex pt-3">
+                            <h5 className="card-title mr-auto ">Living room </h5> 
+                            <AddItem className="modalAddInventory" />
+                        </div>
+                        <div className="card-body">
+                                <div className="item">
+                                    <div className="d-flex align-items-center ">
+                                        Bootstrap
+                                        <div className="ml-auto d-flex align-items-center my-3">
+                                            <EditButton/><DeleteButton />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="item">
+                                    <div className="d-flex align-items-center ">
+                                        Spring framework
+                                        <div className="ml-auto d-flex align-items-center my-3">
+                                            <EditButton/><DeleteButton />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="item">
+                                    <div className="d-flex align-items-center ">
+                                        Vue.js
+                                        <div className="ml-auto d-flex align-items-center my-3">
+                                            <EditButton/><DeleteButton />
+                                        </div>
+                                    </div>
+                                </div>
+
+                            
+                        </div>
+                    </div>
+                    <div className="card card-container ">
+                        <div className="card-header d-flex pt-3">
+                            <h5 className="card-title mr-auto ">Office</h5> 
+                            <AddItem className="modalAddInventory" />
+                        </div>
+                        <div className="card-body">
+                                <div className="item">
+                                    <div className="d-flex align-items-center ">
+                                        Html and css
+                                        <div className="ml-auto d-flex align-items-center my-3">
+                                            <EditButton/><DeleteButton />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="item">
+                                    <div className="d-flex align-items-center ">
+                                        Angular 6
+                                        <div className="ml-auto d-flex align-items-center my-3">
+                                            <EditButton/><DeleteButton />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="item">
+                                    <div className="d-flex align-items-center ">
+                                        Javascript
+                                        <div className="ml-auto d-flex align-items-center my-3">
+                                            <EditButton/><DeleteButton />
+                                        </div>
+                                    </div>
+                                </div>
+
+                            
                         </div>
                     </div>
                     
