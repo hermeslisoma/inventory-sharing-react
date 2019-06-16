@@ -2,8 +2,8 @@ export interface IStoreState{
   listInventoryState:IStateInventory[],
   listAreaState:IStateArea[],
   messageState:IMessageState,
+  loginState: ILoginState
 }
-
 
 export interface IStateInventory{
   id:number;
@@ -26,4 +26,9 @@ export interface IStateItem{
 
 export interface IMessageState{
   message:Object;
+}
+
+export interface ILoginState{
+  currentUser:User
+  errorMessage:string
 }
