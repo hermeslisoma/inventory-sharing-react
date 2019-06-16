@@ -1,3 +1,5 @@
+import { User } from "../services/models/loginModel";
+
 export interface IStoreState{
   listInventoryState:IStateInventory[],
   listAreaState:IStateArea[],

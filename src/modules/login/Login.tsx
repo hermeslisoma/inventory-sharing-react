@@ -3,6 +3,8 @@ import './Login.scss'
 import inventoryLogo from '../../statics/images/inventoryLogo.png'
 import { connect } from 'react-redux';
 import classnames from 'classnames'
+import { IStoreState } from '../../reducers/globalState.models.';
+import { login } from '../../actions/login.actions';
 
 // interface MyProps extends RouteComponentProps {
 //     dispatch: any,
@@ -37,11 +39,11 @@ class Login extends Component<any, any>{
         this.usernameRef = React.createRef();
         this.passwordRef = React.createRef();
     }
-    componentDidUpdate(){
-        if (localStorage.getItem("loginUser")){
-            this.props.history.push('/reimbursements')
-        }
-    }
+    // componentDidUpdate(){
+    //     if (localStorage.getItem("loginUser")){
+    //         this.props.history.push('/reimbursements')
+    //     }
+    // }
     componentDidMount(){
         if (localStorage.getItem("loginUser")){
             this.props.history.push('/reimbursements')
@@ -72,6 +74,7 @@ class Login extends Component<any, any>{
                password:''
             }})
 
+            this.props.login(data)
             //this.props.loginUserAction(data)
             
             
@@ -138,6 +141,19 @@ class Login extends Component<any, any>{
                 
             </div>
         )
-     } n
+     } 
 }
+
+const mapStateToProps = (state:IStoreState) =>{
+    return {
+        currentUser: state.loginState.currentUser,
+        errorMessage: state.loginState.errorMessage
+    }
+}
+//this is the actions that will be availible to the component
+const mapDispatchToProps = {
+    login : login
+}
+
+
 export default connect()(Login);

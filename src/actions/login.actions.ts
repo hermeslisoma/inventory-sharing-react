@@ -1,5 +1,7 @@
 // import { ersClient } from "../axios/ers-client";
 import { isError } from "util";
+// import Axios from "axios";
+import axios from 'axios';
 
 
 export const loginTypes = {
@@ -19,8 +21,9 @@ export const login = (username:string, password:string, history:any) => async(di
     }
 
     try{
+        
 
-        const response = await inv.post('/users/login', credentials)
+        const response = await axios.post('/login', credentials)
 
 
         if(response.status === 401){//if user pass is wrong
@@ -38,16 +41,10 @@ export const login = (username:string, password:string, history:any) => async(di
                 type:loginTypes.SUCCESSFUL_LOGIN
             })
             history.push('/users')
-            // if(user.role[0].roleId == 1){
-            //     history.push('/users/admin')
-            // }
-            // else if(user.role[0].roleId == 2){
-            //     history.push('/users/finance')
-            // }
+
             
         } else {
             dispatch({
-                //with a type of INVALID CREDENTIALS
                 type: loginTypes.FAILED_TO_LOGIN
             })
         }        
