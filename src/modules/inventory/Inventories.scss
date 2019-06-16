@@ -1,33 +1,30 @@
-.Areas-container{
-    .item{
-        height: 50px;
-    }
+.Inventories-container{
     .header{
         display: flex;
         flex-wrap: wrap;
         
     }
-    .AddArea-container{
+    .AddInventory-container{
         margin: auto 0 ;
         margin-left: auto;
         height: 50px;
         
     }
-    .areas-container{
+    .inventories-container{
         display: grid;  
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(3, 1fr);
         grid-gap: 10px;
         grid-auto-rows: minmax(100px, auto);
     }
     
     @media (max-width: 770px){
-        .areas-container{
+        .inventories-container{
             grid-template-columns: repeat(2, 1fr);
         }
         
     }
     @media (max-width: 500px){
-        .areas-container{
+        .inventories-container{
             grid-template-columns: repeat(1, 1fr);
         }
         .display-4{
@@ -37,7 +34,7 @@
             margin: auto ;
             
         }
-        .AddArea-container{
+        .AddInventory-container{
             margin: auto ;
             margin-bottom: 50px;
             
@@ -50,20 +47,3 @@
     margin: auto;
     margin-top: 100px
 }
-.button-add{
-    display:flex;
-    justify-content: center;
-    font-size: 38px;
-    border-radius: 50%;
-    height: 30px;
-    width: 30px;
-    padding: 0;
-    margin-left: auto;
-    top:10px;
-    .button-content{
-        margin: -33px;
-        color: white;
-    }
-    
-}
-

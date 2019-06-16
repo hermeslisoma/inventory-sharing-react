@@ -1,12 +1,12 @@
 import * as types from './all.type.actions';
-import { InventoryService } from '../services/inventoryService';
-import { IStateInventory } from '../reducers/globalState.models.';
+import { AreaService } from '../services/areaService';
+import { IStateArea } from '../reducers/globalState.models.';
 
 
-export const deleteInventoryAction = (id:number) => async dispatch => {
+export const deleteAreaAction = (id:number) => async dispatch => {
     try{
-        let inventoryService = new InventoryService();
-        let response = await inventoryService.Delete(id);
+        let areaService = new AreaService();
+        let response = await areaService.Delete(id);
         if(response.status === 401){//if user pass is wrong
             //send info to the reducer
             dispatch({
@@ -18,7 +18,7 @@ export const deleteInventoryAction = (id:number) => async dispatch => {
                 payload:{
                     id
                 },
-                type:types.DELETE_INVENTORY
+                type:types.DELETE_AREA
             })
             
         }
@@ -28,10 +28,10 @@ export const deleteInventoryAction = (id:number) => async dispatch => {
     }
 
 };
-export const updateInventoryAction = (id:number,inventory:IStateInventory) => async dispatch => {
+export const updateareaAction = (id:number,area:IStateArea) => async dispatch => {
     try{
-        let inventoryService = new InventoryService();
-        let response = await inventoryService.Update(id,inventory);
+        let areaService = new AreaService();
+        let response = await areaService.Update(id,area);
         if(response.status === 401){//if user pass is wrong
             //send info to the reducer
             dispatch({
@@ -42,9 +42,9 @@ export const updateInventoryAction = (id:number,inventory:IStateInventory) => as
             dispatch({
                 payload:{
                     id,
-                    inventory
+                    area
                 },
-                type:types.UPDATE_INVENTORY
+                type:types.UPDATE_AREA
             })
             
         }
@@ -54,10 +54,10 @@ export const updateInventoryAction = (id:number,inventory:IStateInventory) => as
     }
 
 };
-export const createInventoryAction = (inventory:IStateInventory) => async dispatch => {
+export const createareaAction = (area:IStateArea) => async dispatch => {
     try{
-        let inventoryService = new InventoryService();
-        let response = await inventoryService.Create(inventory);
+        let areaService = new AreaService();
+        let response = await areaService.Create(area);
         if(response.status === 401){//if user pass is wrong
             //send info to the reducer
             dispatch({
@@ -67,9 +67,9 @@ export const createInventoryAction = (inventory:IStateInventory) => async dispat
         } else if ( response.status === 200){
             dispatch({
                 payload:{
-                    inventory
+                    area
                 },
-                type:types.CREATE_INVENTORY
+                type:types.CREATE_AREA
             })
             
         }
@@ -79,10 +79,10 @@ export const createInventoryAction = (inventory:IStateInventory) => async dispat
     }
 
 };
-export const getInventoriesByUserAction = (userId:number) => async dispatch => {
+export const getAreasByInventoryID = (inventoryId:number) => async dispatch => {
     try{
-        let inventoryService = new InventoryService();
-        let response = await inventoryService.getInventoriesByUserID(userId);
+        let areaService = new AreaService();
+        let response = await areaService.getAreasByInventoryID(inventoryId);
         if(response.status === 401){//if user pass is wrong
             //send info to the reducer
             dispatch({
@@ -90,12 +90,12 @@ export const getInventoriesByUserAction = (userId:number) => async dispatch => {
                 type: types.UNAUTHORIZED
             })
         } else if ( response.status === 200){
-            const inventories:IStateInventory[] = response.data
+            const {data} = response
             dispatch({
                 payload:{
-                    response : inventories 
+                    data
                 },
-                type:types.SET_INVENTORIES
+                type:types.SET_AREAS
             })
             //history.push('/myinventories')
             

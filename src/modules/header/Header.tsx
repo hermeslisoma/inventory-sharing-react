@@ -7,7 +7,11 @@ import {Nav,
         Navbar,
         NavbarBrand,
         NavbarToggler,
-        Collapse
+        Collapse,
+        Dropdown,
+        DropdownToggle,
+        DropdownItem,
+        DropdownMenu
     } from 'reactstrap'
 
 
@@ -28,8 +32,9 @@ class Header extends Component<MyProps,any>{
         console.log(this.props)
     }
     logout = ()=>{
+        // this function is gonna log out the user
         //this.props.dispatch(logout());
-        localStorage.removeItem("loginUser");
+        //localStorage.removeItem("loginUser");
     }
     toggle = () => {
             this.setState({
@@ -56,7 +61,7 @@ class Header extends Component<MyProps,any>{
         //     )
         // }
         return ( 
-            <div className = "header" >
+            <div className = "header-container" >
         <Navbar color="faded" light expand="sm">
           <NavbarBrand to ='/' className="mr-auto"><img className="img-fluid" src=""  height='50px' width='50px' alt=""/> </NavbarBrand>
           
@@ -75,7 +80,15 @@ class Header extends Component<MyProps,any>{
                 <NavItem className="nav-item">
                     <Link to ='/areas' className="nav-link">Areas</Link>
                 </NavItem>
-                
+                <Dropdown nav isOpen={this.state.dropdownSettings} toggle={this.toggleSetting} inNavbar>
+                    <DropdownToggle nav caret>
+                    <i className="fas fa-cog"></i>
+                    </DropdownToggle>
+                    <DropdownMenu right>
+                    <DropdownItem><Link to ='' className="nav-link" onClick={this.logout} >Log out</Link> </DropdownItem>
+                    
+                    </DropdownMenu>
+                </Dropdown>
             
         </Nav>
               </Collapse></Navbar>
