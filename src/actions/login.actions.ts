@@ -36,10 +36,11 @@ export const login = (username:string, password:string, history:any) => async(di
                 type: loginTypes.INVALID_CREDENTIALS
             })
         } else if( response.status === 200){
-            const user = await response.data
+            // const user = await response.data
+            localStorage.setItem("loginUser",response)
             dispatch({
                 payload:{
-                    user: user
+                    user: response
                 },
                 type:loginTypes.SUCCESSFUL_LOGIN
             })
