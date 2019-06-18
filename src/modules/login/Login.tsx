@@ -157,11 +157,17 @@ class Login extends Component<ILoginProps, any>{
 }
 
 const mapStateToProps = (state:IStoreState) =>{
-    //for whatever reason this gives an error if these are uncommented and i dont know why
-    return {
-        // currentUser: state.loginState.currentUser,
-        // errorMessage: state.loginState.errorMessage
+    if(state.loginState == undefined){
+        return{
+            
+        }
     }
+    else{
+    return {
+        currentUser: state.loginState.currentUser,
+        errorMessage: state.loginState.errorMessage
+    }
+}
 }
 //this is the actions that will be availible to the component
 const mapDispatchToProps = {
