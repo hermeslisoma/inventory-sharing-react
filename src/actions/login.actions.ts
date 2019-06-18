@@ -2,6 +2,8 @@
 import { isError } from "util";
 // import Axios from "axios";
 import axios from 'axios';
+import { LoginService } from '../services/loginService';
+
 
 
 export const loginTypes = {
@@ -15,15 +17,16 @@ export const loginTypes = {
 //a thunk is a two part function, the first part takes in your params
 //the second part takes the param dispatch which we can use to send data to the reducer
 export const login = (username:string, password:string, history:any) => async(dispatch) =>{
-    const credentials = {
-        username,
-        password
-    }
+    // const credentials = {
+    //     username,
+    //     password
+    // }
 
     try{
+        let loginService = new LoginService()
         
 
-        const response = await axios.post('/login', credentials)
+        const response = await loginService.login(username, password)
 
 
         if(response.status === 401){//if user pass is wrong

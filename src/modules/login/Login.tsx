@@ -5,6 +5,9 @@ import { connect } from 'react-redux';
 import classnames from 'classnames'
 import { IStoreState } from '../../reducers/globalState.models.';
 import { login } from '../../actions/login.actions';
+import { RouteComponentProps } from 'react-router';
+import { User } from '../../services/models/loginModel';
+// import { login } from '../../actions/login.actions';
 
 // interface MyProps extends RouteComponentProps {
 //     dispatch: any,
@@ -21,7 +24,15 @@ import { login } from '../../actions/login.actions';
 //   messageFromApi:string
 // }
 
-class Login extends Component<any, any>{
+interface ILoginProps extends RouteComponentProps{
+    // currentUser: User
+    errorMessage: string
+    login: (username:string, password:string, history)=>void
+}
+
+
+
+class Login extends Component<ILoginProps, any>{
     //state to handle the form validation
     state = {
         error:{
@@ -74,7 +85,8 @@ class Login extends Component<any, any>{
                password:''
             }})
 
-            this.props.login(data)
+            // this.props.login(data)
+            this.props.login(username, password, this.props.history)
             //this.props.loginUserAction(data)
             
             
@@ -145,9 +157,10 @@ class Login extends Component<any, any>{
 }
 
 const mapStateToProps = (state:IStoreState) =>{
+    //for whatever reason this gives an error if these are uncommented and i dont know why
     return {
-        currentUser: state.loginState.currentUser,
-        errorMessage: state.loginState.errorMessage
+        // currentUser: state.loginState.currentUser,
+        // errorMessage: state.loginState.errorMessage
     }
 }
 //this is the actions that will be availible to the component
@@ -156,4 +169,4 @@ const mapDispatchToProps = {
 }
 
 
-export default connect()(Login);
+export default connect(mapStateToProps, mapDispatchToProps)(Login);
