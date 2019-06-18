@@ -7,7 +7,7 @@ import base64 from 'base-64'
  export class LoginService extends BaseService<IStateInventory>{
 
   constructor() {
-    super("/login");
+    super("/api/user/login");
   }
 
 login =(username:string, password:string)=> {
