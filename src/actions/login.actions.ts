@@ -27,6 +27,7 @@ export const login = (username:string, password:string, history:any) => async(di
         
 
         const response = await loginService.login(username, password)
+        console.log(response.data)
 
 
         if(response.status === 401){//if user pass is wrong
@@ -37,14 +38,14 @@ export const login = (username:string, password:string, history:any) => async(di
             })
         } else if( response.status === 200){
             // const user = await response.data
-            localStorage.setItem("loginUser",response)
+            localStorage.setItem("loginUser",response.data)
             dispatch({
                 payload:{
-                    user: response
+                    user: response.data
                 },
                 type:loginTypes.SUCCESSFUL_LOGIN
             })
-            history.push('/users')
+            // history.push('/inventories')
 
             
         } else {

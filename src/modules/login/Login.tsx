@@ -57,7 +57,7 @@ class Login extends Component<ILoginProps, any>{
     // }
     componentDidMount(){
         if (localStorage.getItem("loginUser")){
-            this.props.history.push('/reimbursements')
+            this.props.history.push('/inventories')
         }
     }
     onHandleLogin = (e:SyntheticEvent) => {
