@@ -13,13 +13,14 @@ import {Nav,
         DropdownItem,
         DropdownMenu
     } from 'reactstrap'
+import { IStoreState, ILoginState } from '../../reducers/globalState.models.';
+import { logout } from '../../actions/login.actions';
 
 
 
 interface MyProps {
-    value?:string
-    history?:any,
-    dispatch:any,
+    logout:any,
+    loginState:ILoginState
     
 }
 class Header extends Component<MyProps,any>{
@@ -33,8 +34,7 @@ class Header extends Component<MyProps,any>{
     }
     logout = ()=>{
         // this function is gonna log out the user
-        //this.props.dispatch(logout());
-        //localStorage.removeItem("loginUser");
+        this.props.logout();
     }
     toggle = () => {
             this.setState({
@@ -53,13 +53,13 @@ class Header extends Component<MyProps,any>{
         
     } 
     render(){
-        // if(!this.props.loginState.isAuthenticated)
-        // {
-        //     return (
-        //         <Nav  >
-        //         </Nav >
-        //     )
-        // }
+        if(!this.props.loginState.isAuthenticated)
+        {
+            return (
+                <Nav  >
+                </Nav >
+            )
+        }
         return ( 
             <div className = "header-container" >
         <Navbar color="faded" light expand="sm">
@@ -98,4 +98,16 @@ class Header extends Component<MyProps,any>{
                     }
     
 }
-export default connect()(Header);
+
+const mapStateToProps = (state:IStoreState) =>{
+    
+    return {
+        loginState: state.loginState
+    }
+}
+
+const mapDispatchToProps = {
+    logout : logout
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header);

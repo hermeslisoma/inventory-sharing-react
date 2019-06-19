@@ -31,6 +31,7 @@ export interface IMessageState{
 }
 
 export interface ILoginState{
+  isAuthenticated:boolean,
   currentUser:User
   errorMessage:string
 }

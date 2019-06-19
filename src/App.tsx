@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.scss'
 import './include/bootstrap'
-import {HashRouter, Route,Switch} from 'react-router-dom'
+import {BrowserRouter, Route,Switch} from 'react-router-dom'
 
 //Components
 import { Provider } from 'react-redux';
@@ -21,8 +21,8 @@ class App extends Component<any,any> {
     const store = configureStore();
     return (
       <Provider store={store} >
-          <HashRouter>
-           <Header />
+          <BrowserRouter>
+           <Header/>
           <div className="container">
               
               <Switch>
@@ -34,7 +34,7 @@ class App extends Component<any,any> {
               </Switch> 
           </div>
              
-          </HashRouter> 
+          </BrowserRouter> 
         
         </Provider>
     

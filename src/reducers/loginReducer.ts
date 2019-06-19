@@ -1,29 +1,37 @@
 import { ILoginState } from "./globalState.models.";
-//import { switchStatement } from "@babel/types";
-import { loginTypes } from "../actions/login.actions";
+import * as types from '../actions/all.type.actions';
+
 
 const initialState: ILoginState = {
+    isAuthenticated:false,
     currentUser: undefined,
     errorMessage: undefined
 }
 
 export const loginReducer = (state = initialState, action) =>{
     switch (action.type) {
-        case loginTypes.INVALID_CREDENTIALS:
+        case types.INVALID_CREDENTIALS:
             return{
                 ...state,
                 errorMessage:'Invalid Credentials'
             }
             //break;
-        case loginTypes.FAILED_TO_LOGIN:
+        case types.FAILED_TO_LOGIN:
             return{
                 ...state,
                 errorMessage:'failed to login'
             }
-        case loginTypes.SUCCESSFUL_LOGIN:
+        case types.SUCCESSFUL_LOGIN:
             return{
                 ...state,
-                currentUser:action.payload,
+                isAuthenticated:true,
+                currentUser:{...action.payload.user},
+                errorMessage:undefined
+            }
+        case types.LOG_OUT:
+            return{
+                isAuthenticated:false,
+                currentUser:undefined,
                 errorMessage:undefined
             }
         default:

@@ -7,7 +7,7 @@ import { IStoreState } from '../../reducers/globalState.models.';
 import { login } from '../../actions/login.actions';
 import { RouteComponentProps } from 'react-router';
 import { User } from '../../services/models/loginModel';
-import { RegisterUser } from './Register';
+//import { RegisterUser } from './Register';
 // import { login } from '../../actions/login.actions';
 
 // interface MyProps extends RouteComponentProps {
@@ -85,7 +85,8 @@ class Login extends Component<ILoginProps, any>{
                username:'',
                password:''
             }})
-
+            console.log('try to login with::',username,password);
+            
             // this.props.login(data)
             this.props.login(username, password, this.props.history)
             //this.props.loginUserAction(data)
@@ -147,7 +148,6 @@ class Login extends Component<ILoginProps, any>{
                             
                             <button  type="submit" className="btn btn-block btn-warning" >Log In</button>
                         </form>
-                        <RegisterUser/>
                         
                     </div>
                     
@@ -159,19 +159,12 @@ class Login extends Component<ILoginProps, any>{
 }
 
 const mapStateToProps = (state:IStoreState) =>{
-    if(state.loginState == undefined){
-        return{
-            
-        }
-    }
-    else{
+    
     return {
-        currentUser: state.loginState.currentUser,
-        errorMessage: state.loginState.errorMessage
+        loginState: state.loginState
     }
 }
-}
-//this is the actions that will be availible to the component
+
 const mapDispatchToProps = {
     login : login
 }

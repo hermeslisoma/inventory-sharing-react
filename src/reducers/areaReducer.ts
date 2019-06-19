@@ -22,12 +22,12 @@ export default function(state:IStateArea[] = initialState, action:any) {
 
     case types.UPDATE_AREA:
             let Area:IStateArea = payload;
-            newState = [...state].map((a:IStateArea)=>a.id==Area.id? Area:a);
+            newState = [...state].map((a:IStateArea)=>a.id===Area.id? Area:a);
         return [...newState ];
 
     case types.DELETE_AREA:
             id = payload;
-            newState = [...state].filter((a:IStateArea)=>a.id!=id);
+            newState = [...state].filter((a:IStateArea)=>a.id!==id);
         return [...newState ];
         
     case types.CLEAR_AREAS:
@@ -37,7 +37,7 @@ export default function(state:IStateArea[] = initialState, action:any) {
         itemId = payload;
 
         newState = [...state].map((a:IStateArea)=>{
-            a.itemsList= [...a.itemsList].filter((item:IStateItem)=>item.id!=itemId);
+            a.itemsList= [...a.itemsList].filter((item:IStateItem)=>item.id!==itemId);
             return a;
         });
 
@@ -47,7 +47,7 @@ export default function(state:IStateArea[] = initialState, action:any) {
         AreaId = payload.AreaId;
 
         newState = [...state].map((a:IStateArea)=>{
-            if(a.id==AreaId){
+            if(a.id===AreaId){
                 a.itemsList = [...a.itemsList,item];
             }
             return a;
@@ -59,7 +59,7 @@ export default function(state:IStateArea[] = initialState, action:any) {
     
             newState = [...state].map((a:IStateArea)=>{
                 a.itemsList= [...a.itemsList].map((i:IStateItem)=>{
-                    if (i.id==item.id){return  item }
+                    if (i.id===item.id){return  item }
                     return i
                 });
                 return a;

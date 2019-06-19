@@ -20,12 +20,12 @@ export default function(state:IStateInventory[] = initialState, action:any) {
 
     case types.UPDATE_INVENTORY:
             let inventory:IStateInventory = payload;
-            newState = [...state].map((i:IStateInventory)=>i.id==inventory.id? inventory:i);
+            newState = [...state].map((i:IStateInventory)=>i.id===inventory.id? inventory:i);
         return [...newState ];
 
     case types.DELETE_INVENTORY:
             let id:number = payload;
-            newState = [...state].filter((i:IStateInventory)=>i.id!=id);
+            newState = [...state].filter((i:IStateInventory)=>i.id!==id);
         return [...newState ];
         
     case types.CLEAR_INVENTORIES:
