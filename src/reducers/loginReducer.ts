@@ -23,7 +23,7 @@ export const loginReducer = (state = initialState, action) =>{
         case loginTypes.SUCCESSFUL_LOGIN:
             return{
                 ...state,
-                currentUser:action.payload.user,
+                currentUser:action.payload,
                 errorMessage:undefined
             }
         default:

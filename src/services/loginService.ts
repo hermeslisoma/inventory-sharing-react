@@ -1,10 +1,10 @@
 
 import axios from "axios";
 import { BaseService } from './baseService';
-import { IStateInventory } from "../reducers/globalState.models.";
+import { ILoginState } from "../reducers/globalState.models.";
 import base64 from 'base-64'
 
- export class LoginService extends BaseService<IStateInventory>{
+ export class LoginService extends BaseService<ILoginState>{
 
   constructor() {
     super("/api/user/login");

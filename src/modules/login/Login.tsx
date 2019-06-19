@@ -7,6 +7,7 @@ import { IStoreState } from '../../reducers/globalState.models.';
 import { login } from '../../actions/login.actions';
 import { RouteComponentProps } from 'react-router';
 import { User } from '../../services/models/loginModel';
+import { RegisterUser } from './Register';
 // import { login } from '../../actions/login.actions';
 
 // interface MyProps extends RouteComponentProps {
@@ -57,7 +58,7 @@ class Login extends Component<ILoginProps, any>{
     // }
     componentDidMount(){
         if (localStorage.getItem("loginUser")){
-            this.props.history.push('/inventories')
+            // this.props.history.push('/home')
         }
     }
     onHandleLogin = (e:SyntheticEvent) => {
@@ -146,6 +147,7 @@ class Login extends Component<ILoginProps, any>{
                             
                             <button  type="submit" className="btn btn-block btn-warning" >Log In</button>
                         </form>
+                        <RegisterUser/>
                         
                     </div>
                     
