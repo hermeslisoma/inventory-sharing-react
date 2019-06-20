@@ -6,7 +6,7 @@ import { IStateArea } from "../reducers/globalState.models.";
  export class AreaService extends BaseService<IStateArea>{
 
   constructor() {
-    super("/inventories/areas");
+    super("/api/inventories/areas");
   }
 
 getAreasByInventoryID = (InventoryId:number)=> {

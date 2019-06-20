@@ -11,7 +11,7 @@ export default function(state:IStateInventory[] = initialState, action:any) {
   console.log('reducer in inventory:',payload)
   switch(action.type) {
     case types.SET_INVENTORIES:
-        newState = payload;//this step is just to verify the type of the payload before set up the state
+        newState = payload.inventoryList;//this step is just to verify the type of the payload before set up the state
         return [...newState ];
 
     case types.CREATE_INVENTORY:

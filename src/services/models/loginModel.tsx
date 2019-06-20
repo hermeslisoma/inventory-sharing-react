@@ -1,6 +1,10 @@
 export interface LoginUser {
     token:string,
-    user:User 
+    id: number,
+    userName: string,
+    firstName: string,
+    lastName: string,
+    email: string
     };
 export interface User {
     id: number,

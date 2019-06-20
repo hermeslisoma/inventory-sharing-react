@@ -1,8 +1,16 @@
 import React, { Component } from 'react'
 import { Button, Modal, ModalHeader, ModalBody } from 'reactstrap';
 import { connect } from 'react-redux';
+import {createInventoryAction} from '../../actions/inventory.actions'
 
-class AddInventory extends Component<any,any> {
+interface MyProps {
+    createInventoryAction,
+    buttonLabel:string,
+    className:string
+    
+}
+
+class AddInventory extends Component<MyProps,any> {
     state = {
         modal:false
     }
@@ -18,9 +26,11 @@ class AddInventory extends Component<any,any> {
     }
     addInventory = ()=>{
         let inventory = {
-            title:this.titleRef.value,
+            name:this.titleRef.value,
             description:this.descriptionRef.value,
         }
+        this.props.createInventoryAction(inventory);
+        this.toggle();
 
     }
     toggle = () =>{
@@ -72,7 +82,7 @@ class AddInventory extends Component<any,any> {
     }
 }
 export const mapDispatchProps = {
-    
+    createInventoryAction
 }
 const mapStateToProps = (state) =>{
     return {

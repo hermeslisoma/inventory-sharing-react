@@ -54,25 +54,25 @@ export const updateInventoryAction = (id:number,inventory:IStateInventory) => as
     }
 
 };
-export const createInventoryAction = (inventory:IStateInventory) => async dispatch => {
+export const createInventoryAction = (inventory:IStateInventory ,userId:number) => async dispatch => {
     try{
         let inventoryService = new InventoryService();
-        let response = await inventoryService.Create(inventory);
-        if(response.status === 401){//if user pass is wrong
-            //send info to the reducer
-            dispatch({
-                //with a type of INVALID CREDENTIALS
-                type: types.UNAUTHORIZED
-            })
-        } else if ( response.status === 200){
-            dispatch({
-                payload:{
-                    inventory
-                },
-                type:types.CREATE_INVENTORY
-            })
+        //TODO:: End point to create
+        //let response = await inventoryService.createInventoryToUser(inventory,userId);
+
+        // if(response.status === 401){
+        //     dispatch({
+        //         type: types.UNAUTHORIZED
+        //     })
+        // } else if ( response.status === 200){
+        //     dispatch({
+        //         payload:{
+        //             inventory
+        //         },
+        //         type:types.CREATE_INVENTORY
+        //     })
             
-        }
+        // }
       
     }  catch(err){
         console.log(err);      
@@ -83,6 +83,7 @@ export const getInventoriesByUserAction = (userId:number) => async dispatch => {
     try{
         let inventoryService = new InventoryService();
         let response = await inventoryService.getInventoriesByUserID(userId);
+        console.log("this is the list to update::",response)
         if(response.status === 401){//if user pass is wrong
             //send info to the reducer
             dispatch({
@@ -90,10 +91,11 @@ export const getInventoriesByUserAction = (userId:number) => async dispatch => {
                 type: types.UNAUTHORIZED
             })
         } else if ( response.status === 200){
-            const inventories:IStateInventory[] = response.data
+           
+            const inventoryList:IStateInventory[] = response.data
             dispatch({
                 payload:{
-                    response : inventories 
+                    inventoryList
                 },
                 type:types.SET_INVENTORIES
             })

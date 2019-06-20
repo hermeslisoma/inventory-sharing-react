@@ -11,12 +11,14 @@ export class BaseService<T> {
   getHeaders()  {
     let login: LoginUser = this.getCurrentLogin();
     const headers: any = {'Content-Type': 'application/json'};
-    if (login) headers.Authorization = 'Beared '+login.token;
+    if (login) headers.Authorization = 'Bearer '+ login.token;
+    console.log('this are the headers from get headers:',headers)
     return headers;
   }
 
   getCurrentLogin(): LoginUser {
     let login: LoginUser;
+    console.log('this is the local storage:',JSON.parse(localStorage.getItem("loginUser")))
     const data = localStorage.getItem("loginUser");
     if(data)  login = JSON.parse(data)
     //@ts-ignore

@@ -6,16 +6,16 @@ import { IStateInventory } from "../reducers/globalState.models.";
  export class InventoryService extends BaseService<IStateInventory>{
 
   constructor() {
-    super("/inventories");
+    super("/api/inventories");
   }
 
-//this methos goes to http://myhost/inventories/:inventoryId with get method and return all inventoris es for that user
 getInventoriesByUserID =(inventoryId:number)=> {
-    return axios.get(`${this.url}/${inventoryId}`, {headers: this.getHeaders()})
+   
+    return axios.get(`${this.url}/users/${inventoryId}`, {headers: this.getHeaders()})
                  .then(resp => {
-                   return resp.data;
+                   return resp;
                  }).catch(error => {
-                   return error.response.data
+                   return error.response
                  });
   }
 

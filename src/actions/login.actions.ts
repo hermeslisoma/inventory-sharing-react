@@ -1,6 +1,7 @@
 
 import { LoginService } from '../services/loginService';
 import * as types from './all.type.actions';
+import { RegisterService } from '../services/registerService';
 
 export const logout = () => async(dispatch) =>{
     
@@ -10,6 +11,15 @@ export const logout = () => async(dispatch) =>{
                 type:types.LOG_OUT
             })
 
+
+
+}
+export const register = (user) => async(dispatch) =>{
+    
+    
+    
+
+    
 
 
 }
@@ -31,7 +41,6 @@ export const login = (username:string, password:string, history:any) => async(di
             })
         } else if( response.status === 200){
             // const user = await response.data
-            localStorage.setItem("loginUser",response.data)
             dispatch({
                 payload:{
                     user: response.data

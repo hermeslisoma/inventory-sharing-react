@@ -8,17 +8,13 @@ import { User } from "./models/loginModel";
  export class RegisterService extends BaseService<ILoginState>{
 
   constructor() {
-    super("/api/user/registration");
+    super("/register");
   }
 
   getRegisterHeaders = () =>  {
-    // getLoginHeaders = (creds:String) =>  {
         const headers: any = {
       'content-type': 'application/json',
-    //   'Authorization': `Basic ${creds}`
     };
-    // headers.Authorization = 'Basic '+creds;
-    // console.log(headers,"this is gonna be my headers");
     return headers;
   }
   

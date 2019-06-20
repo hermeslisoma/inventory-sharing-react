@@ -2,9 +2,10 @@ import React, { Component } from 'react'
 import { Button, Modal, ModalHeader, ModalBody } from 'reactstrap';
 import { connect } from 'react-redux';
 import { RegisterService } from '../../services/registerService';
+import { register } from '../../actions/login.actions';
 // import './Areas.scss'
 
-export class RegisterUser extends Component<any,any> {
+export default class RegisterUser extends Component<any,any> {
     state = {
         modal:false
     }
@@ -22,24 +23,32 @@ export class RegisterUser extends Component<any,any> {
       this.firstNameRef = React.createRef();
       this.lastNameRef = React.createRef();
       
-      
-
-
     }
-    addItem = (event)=>{
+    addItem =  async (event)=>{
         event.preventDefault()
-        let user = {
+        let userToRegister = {
             username:this.unameRef.value,
             password:this.passRef.value,
             email:this.emailRef.value,
-            firstame:this.firstNameRef.value,
+            firstname:this.firstNameRef.value,
             lastname:this.lastNameRef.value
         }
-        console.log(user)
-        
-        let registerService = new RegisterService()
 
-        registerService.register(user)
+        //send this to actions to handle the async behave of the call to the backend
+        let registerService = new RegisterService()
+        const response = await registerService.register(userToRegister);
+
+        console.log(response);
+        
+        //TODO::: please handle the bad request with some kind of message to the user 
+        //when the the username or email already exist in the database
+        // you can take as example the functionality in the login when username or password is not 
+        // provided, we have to handle it with local state instead to let html5 validated.
+        
+
+        //at success this modal has to be closed.
+        //and clean the fields.
+        this.toggle();
 
     }
     toggle = () =>{
@@ -139,14 +148,3 @@ export class RegisterUser extends Component<any,any> {
         )
     }
 }
-
-const mapStateToProps = (state) =>{
-    return {
-
-    };
-}
-export const mapDispatchToProps = {
-    // register:register
-}
-
-export default connect(mapStateToProps,mapDispatchToProps)(RegisterUser);
