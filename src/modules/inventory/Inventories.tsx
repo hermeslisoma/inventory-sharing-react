@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, SyntheticEvent } from 'react'
 import { Link, RouteComponentProps } from 'react-router-dom';
 import './Inventories.scss'
 import AddInventory from './AddInventory';
@@ -8,18 +8,25 @@ import DeleteInventory from './ActionsButtons/DeleteInventory';
 import { connect } from 'react-redux';
 import { IStoreState, IStateInventory } from '../../reducers/globalState.models.';
 import { ILoginState } from '../../reducers/globalState.models.';
-import {getInventoriesByUserAction} from '../../actions/inventory.actions'
+import {getInventoriesByUserAction, setCurrentInventoryAction} from '../../actions/inventory.actions'
 import {Spinner} from 'reactstrap'
 
 interface myProps extends RouteComponentProps{
     loginState:ILoginState,
     listInventoryState:IStateInventory[],
     getInventoriesByUserAction:any
+    setCurrentInventoryAction:any
     
 
 }
 
 class Inventories extends Component<myProps, any> {
+
+    areaLink = (id) =>{
+        this.props.setCurrentInventoryAction(id)
+        this.props.history.push('/areas')
+        return(console.log('woo'))
+    }
 
             componentDidMount(){
                 if(this.props.loginState.isAuthenticated){
@@ -53,7 +60,8 @@ class Inventories extends Component<myProps, any> {
                             </div>
                             
                             <p className="card-text">{i.description}</p>
-                            <Link to="/areas" className="btn btn-warning">see Inventory</Link>
+                            <button className="btn btn-warning" onClick={
+                                (i)=>this.areaLink(i)}>see Inventory</button>
                         </div>
                     </div>
                     )
@@ -63,7 +71,7 @@ class Inventories extends Component<myProps, any> {
             <div className='container Inventories-container mt-5'>
                 <div className="header d-flex flex-row">
                     <p className="display-4">My inventories</p>
-                    <AddInventory className="modalAddInventory" buttonLabel='Add Inventory' />
+                    {/* <AddInventory className="modalAddInventory" buttonLabel='Add Inventory' /> */}
                 </div>
                 
                 <div className="inventories-container p-3">
@@ -84,6 +92,7 @@ const mapStateToProps = (state:IStoreState) =>{
 
 const mapDispatchToProps = {
     getInventoriesByUserAction,
+    setCurrentInventoryAction
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Inventories);

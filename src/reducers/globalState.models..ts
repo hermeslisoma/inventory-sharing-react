@@ -4,7 +4,8 @@ export interface IStoreState{
   listInventoryState:IStateInventory[],
   listAreaState:IStateArea[],
   messageState:IMessageState,
-  loginState: ILoginState
+  loginState: ILoginState,
+  currentInventoryState: IStateInventory
 }
 
 export interface IStateInventory{
