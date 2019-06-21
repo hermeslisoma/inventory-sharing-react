@@ -3,8 +3,16 @@
 import React, { Component } from 'react'
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import { connect } from 'react-redux';
+import { IStoreState, IStateInventory } from '../../../reducers/globalState.models.';
+import {deleteInventoryAction} from '../../../actions/inventory.actions'
 
- class DeleteInventory extends Component <any,any>{
+
+interface myProps{
+    inventory:IStateInventory,
+    deleteInventoryAction:(inventoryid:number)=>{},
+    className:string
+}
+ class DeleteInventory extends Component <myProps,any>{
     state = {
         modal:false
     }
@@ -15,7 +23,7 @@ import { connect } from 'react-redux';
       }
     deleteInventory=(e)=>{
         e.preventDefault();
-        //this.props.deleteInventoryAction(this.props.id)
+        this.props.deleteInventoryAction(this.props.inventory.id);
         this.toggle();
 
 
@@ -23,8 +31,8 @@ import { connect } from 'react-redux';
     render() {
         return (
             <>
-                <i onClick={this.toggle} className="fas fa-trash-alt"></i>
-                <Modal isOpen={this.state.modal} fade={false} toggle={this.toggle} className={this.props.className}>
+                <i onClick={this.toggle} className={`fas fa-trash-alt ${this.props.className}`}></i>
+                <Modal isOpen={this.state.modal} fade={false} toggle={this.toggle} >
             <ModalHeader toggle={this.toggle}>Delete Inventory</ModalHeader>
             <ModalBody>
                 <form  onSubmit={this.deleteInventory} className=' m-2'>
@@ -36,7 +44,7 @@ import { connect } from 'react-redux';
                     <br/>
                     <div className='w-100 d-flex justify-content-around'>
                         <Button type='submit' color="danger" >Delete</Button>
-                        <Button  onClick={this.toggle} color="primary" >Cancel</Button>
+                        <Button  onClick={this.toggle} color="info" >Cancel</Button>
                     </div>
                     
 
@@ -50,14 +58,14 @@ import { connect } from 'react-redux';
         )
     }
 }
-// export const mapDispatchProps = {
-   
-// }
-// const mapStateToProps = (state:)=>{
-//     return{
+export const mapDispatchProps = {
+    deleteInventoryAction
+}
+const mapStateToProps = (state:IStoreState)=>{
+    return{
        
-//     }
+    }
 
-// }
-export default connect()(DeleteInventory)
+}
+export default connect(mapStateToProps,mapDispatchProps)(DeleteInventory)
 

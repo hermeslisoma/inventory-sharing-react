@@ -15,16 +15,16 @@ export default function(state:IStateInventory[] = initialState, action:any) {
         return [...newState ];
 
     case types.CREATE_INVENTORY:
-            let newInventory = payload;
+            let newInventory = payload.resp;
         return [...state, newInventory ];
 
     case types.UPDATE_INVENTORY:
-            let inventory:IStateInventory = payload;
+            let inventory:IStateInventory = payload.inventory;
             newState = [...state].map((i:IStateInventory)=>i.id===inventory.id? inventory:i);
         return [...newState ];
 
     case types.DELETE_INVENTORY:
-            let id:number = payload;
+            let id:number = payload.id;
             newState = [...state].filter((i:IStateInventory)=>i.id!==id);
         return [...newState ];
         

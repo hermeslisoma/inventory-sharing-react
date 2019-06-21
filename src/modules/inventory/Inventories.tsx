@@ -19,9 +19,8 @@ interface myProps extends RouteComponentProps{
 
 }
 
-
-
 class Inventories extends Component<myProps, any> {
+
             componentDidMount(){
                 if(this.props.loginState.isAuthenticated){
                     let userId:number = this.props.loginState.currentUser.id;
@@ -37,6 +36,7 @@ class Inventories extends Component<myProps, any> {
                 console.log('esto es updated::',this.props)
             }
     render() {
+
         let list:any;
             if (this.props.listInventoryState[0]){
                 console.log('ready to print',[...this.props.listInventoryState]) 
@@ -46,9 +46,9 @@ class Inventories extends Component<myProps, any> {
                         <div className="card-body">
                             <h5 className="card-title"> {i.name}</h5>
                             <div className="actions my-2 d-flex justify-content-around align-items-center">
-                                <ShareButton />
-                                <EditButton/>
-                                <DeleteInventory/>
+                                <ShareButton className="text-primary" inventory = {i} />
+                                <EditButton  className="text-warning" inventory = {i}  />
+                                <DeleteInventory className="text-danger" inventory = {i}/>
 
                             </div>
                             

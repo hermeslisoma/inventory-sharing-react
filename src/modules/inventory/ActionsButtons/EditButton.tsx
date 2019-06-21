@@ -1,27 +1,40 @@
-import React, { Component } from 'react'
+import React, { Component, SyntheticEvent } from 'react'
 import { Button, Modal, ModalHeader, ModalBody } from 'reactstrap';
 import { connect } from 'react-redux';
+import { IStoreState, IStateInventory } from '../../../reducers/globalState.models.';
+import {updateInventoryAction} from '../../../actions/inventory.actions'
 
-class EditButton extends Component<any,any> {
+interface myProps{
+    inventory:IStateInventory,
+    updateInventoryAction:(id:number,inventory:IStateInventory)=>{},
+    className:string
+}
+class EditButton extends Component<myProps,any> {
     state = {
         modal:false
     }
-    titleRef:any;
+    nameRef:any ;
     descriptionRef:any;
 
     constructor(props) {
       super(props);
-      this.titleRef = React.createRef();
+      this.nameRef = React.createRef();
       this.descriptionRef = React.createRef();
 
 
     }
-    updateInventory = ()=>{
-        let inventory = {
-            title:this.titleRef.value,
+    componentDidMount(){
+
+    }
+    updateInventory = (e:SyntheticEvent)=>{
+        e.preventDefault();
+        let inventory:IStateInventory = {
+            id:this.props.inventory.id,
+            name:this.nameRef.value,
             description:this.descriptionRef.value,
         }
-
+        this.props.updateInventoryAction(inventory.id,inventory);
+        this.toggle();
     }
     toggle = () =>{
         this.setState(prevState => ({
@@ -29,23 +42,25 @@ class EditButton extends Component<any,any> {
         }));
       }
     render() {
+        const {id,name,description} = this.props.inventory;
         return (
             <div >
-            <i className="fas fa-edit" onClick={this.toggle}></i>
-          <Modal isOpen={this.state.modal} fade={false} toggle={this.toggle} className={this.props.className}>
+            <i className={`fas fa-edit ${this.props.className}`} onClick={this.toggle}></i>
+          <Modal isOpen={this.state.modal} fade={false} toggle={this.toggle} >
             <ModalHeader toggle={this.toggle}>Edit inventory</ModalHeader>
             <ModalBody>
                 <form  onSubmit={this.updateInventory} className=''>
                     <div className="form-group">
                         <input 
                             type="text" 
-                            id='title' 
+                            id='name' 
                             className="form-control"
-                            name='title'
-                            placeholder='title to update'
+                            name='name'
+                            placeholder='name to update'
                             required    
                             min= '0'
-                            ref = {input=>this.titleRef = input}
+                            ref = {input=>this.nameRef = input}
+                            defaultValue = {name}
                     />
                     </div>
                     <div className="form-group">
@@ -58,9 +73,10 @@ class EditButton extends Component<any,any> {
                             required    
                             min= '0'
                             ref = {input=>this.descriptionRef = input}
+                            defaultValue = {description}
                     />
                     </div>
-                    <Button className='btn btn-block ' type='submit' color="primary" >Update inventory</Button>
+                    <Button className='btn btn-block ' type='submit' color="warning" >Update inventory</Button>
 
 
                 </form>
@@ -72,11 +88,12 @@ class EditButton extends Component<any,any> {
     }
 }
 export const mapDispatchProps = {
-    
+    updateInventoryAction
 }
-const mapStateToProps = (state) =>{
-    return {
+const mapStateToProps = (state:IStoreState)=>{
+    return{
+       
+    }
 
-    };
 }
 export default connect(mapStateToProps,mapDispatchProps)(EditButton);

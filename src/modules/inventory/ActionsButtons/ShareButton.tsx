@@ -1,24 +1,38 @@
 
-import React, { Component } from 'react'
+import React, { Component, SyntheticEvent } from 'react'
 import { Button, Modal, ModalHeader, ModalBody } from 'reactstrap';
 import { connect } from 'react-redux';
+import { PermissionService } from '../../../services/permissionService';
+import { IStateInventory } from '../../../reducers/globalState.models.';
 
-class ShareButton extends Component<any,any> {
+interface myProps{
+  inventory:IStateInventory,
+  className:string
+}
+export default class ShareButton extends Component<myProps,any> {
     state = {
         modal:false
     }
     usernameRef:any;
     descriptionRef:any;
-
+    
     constructor(props) {
       super(props);
       this.usernameRef = React.createRef();
       this.descriptionRef = React.createRef();
-
+  
 
     }
-    shareWithUser = ()=>{
+    shareWithUser = async (e:SyntheticEvent)=>{
+      e.preventDefault();
         let username= this.usernameRef.value;
+        let inventory = this.props.inventory;
+        let  permissionService = new PermissionService();
+        let response = await permissionService.sharePermissionToUser(inventory,username);
+        //TODO:: use the response to let the user success or failure or user not found in database
+        //        
+        console.log('this is the response::',response);
+        this.toggle();
         
 
     }
@@ -30,8 +44,8 @@ class ShareButton extends Component<any,any> {
     render() {
         return (
             <div >
-            <i className="fas fa-share-alt" onClick={this.toggle}></i>
-          <Modal isOpen={this.state.modal} fade={false} toggle={this.toggle} className={this.props.className}>
+            <i className={`fas fa-share-alt ${this.props.className}`}  onClick={this.toggle}></i>
+          <Modal isOpen={this.state.modal} fade={false} toggle={this.toggle} >
             <ModalHeader toggle={this.toggle}>Share with a user</ModalHeader>
             <ModalBody>
                 <form  onSubmit={this.shareWithUser} className=''>
@@ -58,12 +72,3 @@ class ShareButton extends Component<any,any> {
         )
     }
 }
-export const mapDispatchProps = {
-    
-}
-const mapStateToProps = (state) =>{
-    return {
-
-    };
-}
-export default connect(mapStateToProps,mapDispatchProps)(ShareButton);

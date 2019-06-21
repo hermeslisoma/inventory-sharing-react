@@ -59,6 +59,15 @@ export class BaseService<T> {
                   return error.response
                 });
   }
+  UpdateWithItem = (T)=>{
+    console.log('inside the service update item url::',`${this.url}`,T)
+    return axios.patch(`${this.url}`,T, {headers: this.getHeaders()})
+                .then(resp => {
+                  return resp;
+                }).catch(error => {
+                  return error.response
+                });
+  }
   
   Create = (T)=>{
     console.log('inside the service create url::',`${this.url}`,T)
@@ -69,7 +78,7 @@ export class BaseService<T> {
                   return error.response
                 });
   }
-  Delete= (id:number)=>{
+  Delete = (id:number)=>{
     console.log('inside delete:::',`${this.url}/${id}`);
     
     return axios.delete(`${this.url}/${id}`, {headers: this.getHeaders()})

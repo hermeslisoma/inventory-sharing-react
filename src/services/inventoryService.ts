@@ -18,6 +18,16 @@ getInventoriesByUserID =(inventoryId:number)=> {
                    return error.response
                  });
   }
+  saveInventoryByUserId =(userId:number,inventory:IStateInventory)=> {
+   
+    return axios.post(`${this.url}/users/${userId}`,inventory, {headers: this.getHeaders()})
+                 .then(resp => {
+                   console.log("this is the respoinse for the inventory::",resp)
+                   return resp;
+                 }).catch(error => {
+                   return error.response
+                 });
+  }
 
 
 

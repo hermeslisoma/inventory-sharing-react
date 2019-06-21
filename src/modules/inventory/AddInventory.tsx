@@ -1,10 +1,12 @@
 import React, { Component } from 'react'
 import { Button, Modal, ModalHeader, ModalBody } from 'reactstrap';
 import { connect } from 'react-redux';
-import {createInventoryAction} from '../../actions/inventory.actions'
+import {saveInventoryByUserIdAction} from '../../actions/inventory.actions'
+import { IStoreState, ILoginState } from '../../reducers/globalState.models.';
 
 interface MyProps {
-    createInventoryAction,
+    loginState:ILoginState,
+    saveInventoryByUserIdAction,
     buttonLabel:string,
     className:string
     
@@ -24,12 +26,14 @@ class AddInventory extends Component<MyProps,any> {
 
 
     }
-    addInventory = ()=>{
+    addInventory = (e:any)=>{
+        e.preventDefault();
         let inventory = {
             name:this.titleRef.value,
             description:this.descriptionRef.value,
         }
-        this.props.createInventoryAction(inventory);
+        
+        this.props.saveInventoryByUserIdAction(inventory,this.props.loginState.currentUser.id);
         this.toggle();
 
     }
@@ -82,11 +86,11 @@ class AddInventory extends Component<MyProps,any> {
     }
 }
 export const mapDispatchProps = {
-    createInventoryAction
+    saveInventoryByUserIdAction
 }
-const mapStateToProps = (state) =>{
+const mapStateToProps = (state:IStoreState) =>{
     return {
-
+        loginState:state.loginState
     };
 }
 export default connect(mapStateToProps,mapDispatchProps)(AddInventory);
