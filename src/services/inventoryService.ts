@@ -1,5 +1,5 @@
 
-import axios from "axios";
+import axios from 'axios';
 import { BaseService } from './baseService';
 import { IStateInventory } from "../reducers/globalState.models.";
 
@@ -29,6 +29,14 @@ getInventoriesByUserID =(inventoryId:number)=> {
                  });
   }
 
+  getInventoryById = (id:number) => {
+    return axios.get(`${this.url}/${id}`, {headers: this.getHeaders()})
+                .then(resp =>{
+                  return resp;
+                }).catch(error =>{
+                  return error.response
+                });
+  }
 
 
 
