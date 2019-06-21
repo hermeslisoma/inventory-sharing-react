@@ -79,7 +79,7 @@ export const createareaAction = (area:IStateArea) => async dispatch => {
     }
 
 };
-export const getAreasByInventoryID = (inventoryId:number) => async dispatch => {
+export const getAreasByInventoryIDAction = (inventoryId:number) => async dispatch => {
     try{
         let areaService = new AreaService();
         let response = await areaService.getAreasByInventoryID(inventoryId);
