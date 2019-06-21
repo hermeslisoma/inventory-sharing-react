@@ -52,6 +52,7 @@ export class Areas extends Component<IAreaProps, any> {
         // this.areas()
     }
     render() {
+        this.areas()
         let lst
         if (this.props.listAreaState != undefined){
             // console.log('ready to print',[...this.props.listAreaState]) 
@@ -68,8 +69,8 @@ export class Areas extends Component<IAreaProps, any> {
                     <div className="card-body">
                         {console.log(i.items)}
                         {i.items.map((item) => (
-                            <div className="item">
-                                <div key = {item.id} className="d-flex align-items-center ">
+                            <div key = {item.id} className="item">
+                                <div className="d-flex align-items-center ">
                                     {item.name}
                                     <div className="ml-auto d-flex align-items-center my-3">
                                         <EditButton/><DeleteButton/>        

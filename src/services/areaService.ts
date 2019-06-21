@@ -19,8 +19,15 @@ getAreasByInventoryID = (InventoryId:number)=> {
                  });
   }
 
-
-
+addArea = (area) => {
+  console.log(area)
+    return axios.post(`${this.url}`, area, {headers: this.getHeaders()})
+                .then(resp => {
+                  return resp
+                }).catch(error => {
+                  return error.response
+                })
+}
 
 }
  

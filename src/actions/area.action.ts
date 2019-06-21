@@ -54,10 +54,10 @@ export const updateareaAction = (id:number,area:IStateArea) => async dispatch =>
     }
 
 };
-export const createareaAction = (area:IStateArea) => async dispatch => {
+export const createAreaAction = (area) => async dispatch => {
     try{
         let areaService = new AreaService();
-        let response = await areaService.Create(area);
+        let response = await areaService.addArea(area);
         if(response.status === 401){//if user pass is wrong
             //send info to the reducer
             dispatch({
