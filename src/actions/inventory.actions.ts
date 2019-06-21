@@ -111,14 +111,15 @@ export const getInventoriesByUserAction = (userId:number) => async dispatch => {
 };
 
 export const setCurrentInventoryAction = (inv) => dispatch => {
+    // try{
         // let inventoryService = new InventoryService()
         // let response = await inventoryService.getInventoryById(inv)
-        const currentInventory:IStateInventory = inv
+        console.log(inv.name)
+            const currentInventory:IStateInventory = inv
             dispatch({
                 payload:{
                     currentInventory
                 },
                 type:types.SET_CURRENT_INVENTORY
             })
-
-}
+        }

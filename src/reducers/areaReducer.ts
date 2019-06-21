@@ -11,10 +11,14 @@ export default function(state:IStateArea[] = initialState, action:any) {
   let id:number,AreaId:number,itemId:number = undefined;
   let item:IStateItem = undefined;
   console.log('reducer in Area:',payload)
+//   console.log(payload)
   switch(action.type) {
     case types.SET_AREAS:
         newState = payload;//this step is just to verify the type of the payload before set up the state
-        return [...newState ];
+        console.log('new state::::',newState)
+        // console.log(`newstate: ${newState[0]}`)
+        let stat = [...newState]
+        return [...newState];
 
     case types.CREATE_AREA:
             let newArea:IStateArea = payload;
@@ -37,7 +41,7 @@ export default function(state:IStateArea[] = initialState, action:any) {
         itemId = payload;
 
         newState = [...state].map((a:IStateArea)=>{
-            a.itemsList= [...a.itemsList].filter((item:IStateItem)=>item.id!==itemId);
+            a.items= [...a.items].filter((item:IStateItem)=>item.id!==itemId);
             return a;
         });
 
@@ -48,7 +52,7 @@ export default function(state:IStateArea[] = initialState, action:any) {
 
         newState = [...state].map((a:IStateArea)=>{
             if(a.id===AreaId){
-                a.itemsList = [...a.itemsList,item];
+                a.items = [...a.items,item];
             }
             return a;
         });
@@ -58,7 +62,7 @@ export default function(state:IStateArea[] = initialState, action:any) {
             item = payload.Item;
     
             newState = [...state].map((a:IStateArea)=>{
-                a.itemsList= [...a.itemsList].map((i:IStateItem)=>{
+                a.items= [...a.items].map((i:IStateItem)=>{
                     if (i.id===item.id){return  item }
                     return i
                 });

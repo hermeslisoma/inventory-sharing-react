@@ -12,9 +12,10 @@ import { IStateArea } from "../reducers/globalState.models.";
 getAreasByInventoryID = (InventoryId:number)=> {
     return axios.get(`${this.url}/${InventoryId}`, {headers: this.getHeaders()})
                  .then(resp => {
-                   return resp.data;
+                  //  console.log(resp)
+                   return resp;
                  }).catch(error => {
-                   return error.response.data
+                   return error.response
                  });
   }
 

@@ -30,7 +30,7 @@ export class AddArea extends Component<any,any> {
       }
     render() {
         return (
-            <div className='AddArea-container'>
+            <div className='AddInventory-container'>
             
           <Button className='btn btn-secondary text-white' onClick={this.toggle}>{this.props.buttonLabel}</Button>
           <Modal isOpen={this.state.modal} fade={false} toggle={this.toggle} className={this.props.className}>

@@ -61,7 +61,7 @@ class Inventories extends Component<myProps, any> {
                             
                             <p className="card-text">{i.description}</p>
                             <button className="btn btn-warning" onClick={
-                                (i)=>this.areaLink(i)}>see Inventory</button>
+                                ()=>this.areaLink(i)}>see Inventory</button>
                         </div>
                     </div>
                     )
@@ -71,7 +71,7 @@ class Inventories extends Component<myProps, any> {
             <div className='container Inventories-container mt-5'>
                 <div className="header d-flex flex-row">
                     <p className="display-4">My inventories</p>
-                    {/* <AddInventory className="modalAddInventory" buttonLabel='Add Inventory' /> */}
+                    <AddInventory className="modalAddInventory" buttonLabel='Add Inventory' />
                 </div>
                 
                 <div className="inventories-container p-3">
