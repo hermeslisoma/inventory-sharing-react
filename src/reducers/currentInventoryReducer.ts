@@ -9,17 +9,21 @@ let initialState:IStateInventory = {
 }
 
 export const currentInventoryReducer = (state:IStateInventory = initialState, action) =>{
+    console.log(action.payload)
     switch(action.type){
         case types.SET_CURRENT_INVENTORY:
             return{
                 ...state,
-                id: action.payload.currentUser.id,
-                name: action.payload.currentUser.name,
-                description: action.payload.currentUser.description
+                id: action.payload.currentInventory.id,
+                name: action.payload.currentInventory.name,
+                description: action.payload.currentInventory.description
             }
         case types.CLEAR_CURRENT_INVENTORY:
             return{
                 ...state
             }
+    }
+    return{
+        ...state
     }
 }

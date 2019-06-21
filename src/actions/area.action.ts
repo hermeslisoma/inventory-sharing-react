@@ -79,10 +79,11 @@ export const createareaAction = (area:IStateArea) => async dispatch => {
     }
 
 };
-export const getAreasByInventoryIDAction = (inventoryId:number) => async dispatch => {
+export const getAreasByInventoryIdAction = (inventoryId:number) => async dispatch => {
     try{
         let areaService = new AreaService();
         let response = await areaService.getAreasByInventoryID(inventoryId);
+        console.log(`data: ${response.data}`)
         if(response.status === 401){//if user pass is wrong
             //send info to the reducer
             dispatch({
@@ -90,11 +91,12 @@ export const getAreasByInventoryIDAction = (inventoryId:number) => async dispatc
                 type: types.UNAUTHORIZED
             })
         } else if ( response.status === 200){
-            const {data} = response
+            const data:IStateArea[] = response.data
+            console.log(`data2 electic boogaloo: ${data[0].items}`)
             dispatch({
-                payload:{
-                    data
-                },
+                payload:[
+                    ...data
+                ],
                 type:types.SET_AREAS
             })
             //history.push('/myinventories')
@@ -106,3 +108,4 @@ export const getAreasByInventoryIDAction = (inventoryId:number) => async dispatc
     }
 
 };
+

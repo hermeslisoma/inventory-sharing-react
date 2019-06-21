@@ -17,7 +17,8 @@ export interface IStateArea{
   id:number;
   name:string;
   description:string;
-  itemsList:IStateItem[];
+  items:IStateItem[];
+  // items:[]
 
 }
 export interface IStateItem{
