@@ -5,7 +5,8 @@ export interface IStoreState{
   listAreaState:IStateArea[],
   messageState:IMessageState,
   loginState: ILoginState,
-  currentInventoryState: IStateInventory
+  currentInventoryState: IStateInventory,
+  currentAreaState: ICurrentAreaState
 }
 
 export interface IStateInventory{
@@ -36,4 +37,10 @@ export interface ILoginState{
   isAuthenticated:boolean,
   currentUser:User
   errorMessage:string
+}
+
+export interface ICurrentAreaState{
+  id:number;
+  name:string;
+  description:string;
 }
