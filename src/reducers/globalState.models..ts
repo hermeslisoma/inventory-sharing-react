@@ -19,14 +19,10 @@ export interface IStateArea{
   name:string;
   description:string;
   items:IStateItem[];
-  // items:[]
-
 }
 export interface IStateItem{
   id:number;
   name:string;
-  description:string;
-
 }
 
 export interface IMessageState{

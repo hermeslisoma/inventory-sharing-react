@@ -1,20 +1,18 @@
 import React, { Component } from 'react'
 import { Button, Modal, ModalHeader, ModalBody } from 'reactstrap';
 import { connect } from 'react-redux';
-import { IStoreState, IStateInventory, ILoginState, ICurrentAreaState } from '../../reducers/globalState.models.';
-import { createAreaAction, setCurrentAreaAction, updateAreaAction } from '../../actions/area.action';
-import { Link, RouteComponentProps } from 'react-router-dom';
+import { IStoreState, IStateInventory, ILoginState, ICurrentAreaState, IStateArea } from '../../../reducers/globalState.models.';
+import { updateAreaAction } from '../../../actions/area.action';
+import { Area } from '../../../services/models/Models';
 
 
-interface IAddProps extends RouteComponentProps{
-    inventoryState: IStateInventory,
-    loginState:ILoginState,
-    areaState:ICurrentAreaState,
-    // setCurrentAreaAction:any,
-    updateAreaAction:any
+interface myProps {
+    area:IStateArea,
+    updateAreaAction:any,
+    className:string
 }
 
-export class UpdateArea extends Component<any,any> {
+export class UpdateArea extends Component<myProps,any> {
     state = {
         modal:false
     }
@@ -30,17 +28,14 @@ export class UpdateArea extends Component<any,any> {
     }
     updateArea = (event)=>{
         event.preventDefault()
-        console.log('areastate::::::::',this.props.areaState)
-        console.log('loginstate::::::',this.props.loginState)
-        console.log('inventorystate::::::',this.props.inventoryState)
-        let area = {
-            id:this.props.areaState.id,
+        
+        let newArea:Area = {
+            id:this.props.area.id,
             name:this.titleRef.value,
-            description:this.descriptionRef.value,
-            inventory:this.props.inventoryState
+            description:this.descriptionRef.value
         }
 
-        this.props.updateAreaAction(area)
+        this.props.updateAreaAction(newArea)
         this.toggle()
     }
     toggle = () =>{
@@ -52,9 +47,11 @@ export class UpdateArea extends Component<any,any> {
     render() {
         // console.log(this.props.loginState)
         return (
-            <div className='AddInventory-container'>
-            
-          <Button className="fas fa-edit text-warning" onClick={() => this.toggle()}></Button>
+            <>
+        <button className='btn btn-warning' onClick={this.toggle}>
+                <span>Update Area</span>
+            </button>
+          
           <Modal isOpen={this.state.modal} fade={false} toggle={this.toggle} className="modalAddInventory">
             <ModalHeader toggle={this.toggle}>Update Area</ModalHeader>
             <ModalBody>
@@ -69,6 +66,7 @@ export class UpdateArea extends Component<any,any> {
                             required    
                             min= '0'
                             ref = {input=>this.titleRef = input}
+                            defaultValue = {this.props.area.name}
                     />
                     </div>
                     <div className="form-group">
@@ -80,6 +78,7 @@ export class UpdateArea extends Component<any,any> {
                             placeholder='Please insert a description'
                             required 
                             ref={input=>this.descriptionRef= input}
+                            defaultValue = {this.props.area.description}
                     />
                     </div>
                     <Button className='btn btn-block ' type='submit' color="primary" >Update Area</Button>
@@ -89,7 +88,7 @@ export class UpdateArea extends Component<any,any> {
                 
             </ModalBody>
           </Modal>
-        </div>
+        </>
         )
     }
 }
@@ -99,9 +98,6 @@ const mapDispatchToProps = {
 }
 const mapStateToProps = (state:IStoreState) =>{
     return {
-        loginState: state.loginState,
-        inventoryState: state.currentInventoryState,
-        areaState: state.currentAreaState
     }
 }
 

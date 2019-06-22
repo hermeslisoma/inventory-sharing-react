@@ -1,8 +1,16 @@
 import React, { Component } from 'react'
 import { Button, Modal, ModalHeader, ModalBody } from 'reactstrap';
 import { connect } from 'react-redux';
-
-class EditButton extends Component<any,any> {
+import { IStateItem, IStoreState } from '../../../reducers/globalState.models.';
+import{updateItemAction} from '../../../actions/item.actions'
+interface myProps {
+    item:IStateItem,
+    area:any,
+    className:string,
+    updateItemAction:any
+    
+}
+class UpdateItem extends Component<myProps,any> {
     state = {
         modal:false
     }
@@ -43,6 +51,7 @@ class EditButton extends Component<any,any> {
                             required    
                             min= '0'
                             ref = {input=>this.titleRef = input}
+                            defaultValue = {this.props.item.name}
                     />
                     </div>
                     <Button className='btn btn-block ' type='submit' color="primary" >Update Item</Button>
@@ -57,11 +66,12 @@ class EditButton extends Component<any,any> {
     }
 }
 export const mapDispatchProps = {
-    
+  updateItemAction
 }
-const mapStateToProps = (state) =>{
-    return {
+const mapStateToProps = (state:IStoreState)=>{
+   return{
+      
+   }
 
-    };
 }
-export default connect(mapStateToProps,mapDispatchProps)(EditButton);
+export default connect(mapStateToProps,mapDispatchProps)(UpdateItem);

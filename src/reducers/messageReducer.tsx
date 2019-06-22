@@ -9,7 +9,6 @@ let initialState:IMessageState = {
 
 export default function(state:IMessageState = initialState, action:any) {
   let response:IMessageState= action.response;
-  console.log('reducer in message:',response)
   switch(action.type) {
     case types.SET_MESSAGE:
       return { ...state , ...response };

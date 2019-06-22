@@ -10,7 +10,7 @@ let initialState:ICurrentAreaState = {
 }
 
 export const currentAreaReducer = (state:ICurrentAreaState = initialState, action) =>{
-    console.log(action.payload)
+    
     switch(action.type){
         case types.SET_CURRENT_AREA:
             return{

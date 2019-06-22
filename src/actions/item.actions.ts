@@ -7,10 +7,9 @@ export const deleteItemAction = (id:number) => async dispatch => {
     try{
         let itemService = new ItemService();
         let response = await itemService.Delete(id);
-        if(response.status === 401){//if user pass is wrong
-            //send info to the reducer
+        if(response.status === 401){
             dispatch({
-                //with a type of INVALID CREDENTIALS
+                
                 type: types.UNAUTHORIZED
             })
         } else if ( response.status === 200){
@@ -54,10 +53,10 @@ export const updateItemAction = (Item:IStateItem) => async dispatch => {
 
 };
 //I need the areaID to create the item
-export const createItemAction = (AreaId:number,Item:IStateItem) => async dispatch => {
+export const addItemAction = (newItem) => async dispatch => {
     try{
         let itemService = new ItemService();
-        let response = await itemService.Create(Item);
+        let response = await itemService.Create(newItem);
         if(response.status === 401){//if user pass is wrong
             //send info to the reducer
             dispatch({
@@ -65,10 +64,12 @@ export const createItemAction = (AreaId:number,Item:IStateItem) => async dispatc
                 type: types.UNAUTHORIZED
             })
         } else if ( response.status === 200){
+            console.log('this is the response::',response);
+            let item = response.data;
             dispatch({
                 payload:{
-                    AreaId,
-                    Item
+                    areaId:item.area.id,
+                    item
                 },
                 type:types.CREATE_ITEM
             })

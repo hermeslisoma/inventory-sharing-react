@@ -68,17 +68,11 @@ class Header extends Component<MyProps,any>{
           <NavbarToggler onClick={this.toggleNavbar} className="mr-2" />
           <Collapse isOpen={!this.state.collapsed} navbar>
           <Nav navbar >
-               <NavItem className="nav-item">
-                    <Link to ='/' className="nav-link active">Login</Link>    
-                </NavItem>
                 <NavItem className="nav-item">
                     <Link to ='/home' className="nav-link">Home</Link>
                 </NavItem>
                 <NavItem className="nav-item">
                     <Link to ='/inventories' className="nav-link">Inventory</Link>
-                </NavItem>
-                <NavItem className="nav-item">
-                    <Link to ='/areas' className="nav-link">Areas</Link>
                 </NavItem>
                 <Dropdown nav isOpen={this.state.dropdownSettings} toggle={this.toggleSetting} inNavbar>
                     <DropdownToggle nav caret>

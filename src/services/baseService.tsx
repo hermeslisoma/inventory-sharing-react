@@ -71,7 +71,7 @@ export class BaseService<T> {
   
   Create = (T)=>{
     console.log('inside the service create url::',`${this.url}`,T)
-    return axios.patch(`${this.url}`,T, {headers: this.getHeaders()})
+    return axios.post(`${this.url}`,T, {headers: this.getHeaders()})
                 .then(resp => {
                   return resp;
                 }).catch(error => {

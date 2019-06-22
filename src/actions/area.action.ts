@@ -1,16 +1,15 @@
 import * as types from './all.type.actions';
 import { AreaService } from '../services/areaService';
 import { IStateArea, ICurrentAreaState } from '../reducers/globalState.models.';
+import { Area } from '../services/models/Models';
 
 
 export const deleteAreaAction = (id:number) => async dispatch => {
     try{
         let areaService = new AreaService();
         let response = await areaService.Delete(id);
-        if(response.status === 401){//if user pass is wrong
-            //send info to the reducer
+        if(response.status === 401){
             dispatch({
-                //with a type of INVALID CREDENTIALS
                 type: types.UNAUTHORIZED
             })
         } else if ( response.status === 200){
@@ -28,10 +27,15 @@ export const deleteAreaAction = (id:number) => async dispatch => {
     }
 
 };
-export const updateAreaAction = (area) => async dispatch => {
+export const updateAreaAction = (area:IStateArea) => async dispatch => {
     try{
+        let areaUpdate:Area = {
+            id:area.id,
+            name:area.name,
+            description:area.description
+        }
         let areaService = new AreaService();
-        let response = await areaService.updateArea(area);
+        let response = await areaService.updateArea(areaUpdate);
         if(response.status === 401){//if user pass is wrong
             //send info to the reducer
             dispatch({
@@ -39,6 +43,7 @@ export const updateAreaAction = (area) => async dispatch => {
                 type: types.UNAUTHORIZED
             })
         } else if ( response.status === 200){
+            //we update this when the backend fix the response that it gives me
             let updatedArea = response.data
             dispatch({
                 payload:{
@@ -54,22 +59,22 @@ export const updateAreaAction = (area) => async dispatch => {
     }
 
 };
-export const createAreaAction = (area) => async dispatch => {
+export const createAreaAction = (area:Area) => async dispatch => {
     
     try{
         let areaService = new AreaService();
         let response = await areaService.addArea(area);
-
-        if(response.status === 401){//if user pass is wrong
-            //send info to the reducer
+        if(response.status === 401){
             dispatch({
-                //with a type of INVALID CREDENTIALS
                 type: types.UNAUTHORIZED
             })
         } else if ( response.status === 200){
-            let newArea:IStateArea;
-            newArea.id = response.
-
+            let newArea:IStateArea = {
+                id : response.data.id,
+                name : response.data.name,
+                description : response.data.description,
+                items : []
+            };
             dispatch({
                 payload:{
                     newArea

@@ -3,7 +3,7 @@ import { Button, Modal, ModalHeader, ModalBody } from 'reactstrap';
 import { connect } from 'react-redux';
 import { RegisterService } from '../../services/registerService';
 import { register } from '../../actions/login.actions';
-// import './Areas.scss'
+import './register.scss'
 
 export default class RegisterUser extends Component<any,any> {
     state = {
@@ -58,11 +58,17 @@ export default class RegisterUser extends Component<any,any> {
       }
     render() {
         return (
-            <div className='AddItem-container'>
-            
-          <Button className='btn btn-secondary text-white' onClick={this.toggle}><span className="button-content">Register</span></Button>
+            < div className="register-container">
+            <div id="container" onClick={this.toggle}>
+                <button className="learn-more">
+                    <div className="circle">
+                    <span className="icon arrow"></span>
+                    </div>
+                    <p className="button-text"><span className='sign-up-botton'><span className="button-content">Sing up</span></span></p>
+                </button>
+            </div>
           <Modal isOpen={this.state.modal} fade={false} toggle={this.toggle} className={this.props.className}>
-            <ModalHeader toggle={this.toggle}>Register</ModalHeader>
+            <ModalHeader toggle={this.toggle}>Sign Up</ModalHeader>
             <ModalBody>
                 <form  onSubmit={this.addItem} className=''>
                     <div className="form-group">
@@ -125,19 +131,7 @@ export default class RegisterUser extends Component<any,any> {
                             ref = {input=>this.lastNameRef = input}
                     />
                     </div>
-                    {/* <div className="form-group">
-                        <input 
-                            type="text" 
-                            id='uname' 
-                            className="form-control"
-                            name='uname'
-                            placeholder='Username'
-                            required    
-                            min= '0'
-                            ref = {input=>this.unameRef = input}
-                    />
-                    </div> */}
-                    <Button className='btn btn-block ' type='submit' color="primary" >Register User</Button>
+                    <Button className='btn btn-block ' type='submit' color="dark" >Sign Up</Button>
 
 
                 </form>

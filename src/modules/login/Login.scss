@@ -4,16 +4,19 @@
         display: flex;
         .center{
             margin:auto;
+            margin-top: 100px;
             width: 300px;
         }
         .imagecontainer{
             margin: auto;
             width: 150px;
-            margin-top: 50px;
+            margin-top: 30px;
 
         }
         .loginForm{
             margin: auto;
+            margin-top: 30px;
+            margin-bottom: 20px;
             display: flex;
             flex-direction: column;
             

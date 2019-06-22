@@ -45,25 +45,30 @@
     }
 
 }
+.dropdown-menu-Area{
+    background-color:rgba(194, 194, 201, 0.35)  !important;
+    top:5px !important;;
+    /* background-clip: padding-box; */
+    border: 0px solid rgba(0,0,0,.15);
+    
+    .btn{
+        margin: 10px auto;
+
+
+    }
+}
+
+.actionButtons{
+
+}
+.AddItem-container{
+    background-color: red;
+}
 .modal-content{
     max-width:300px ;
     margin: auto;
     margin-top: 100px
 }
-.button-add{
-    display:flex;
-    justify-content: center;
-    font-size: 38px;
-    border-radius: 50%;
-    height: 30px;
-    width: 30px;
-    padding: 0;
-    margin-left: auto;
-    top:10px;
-    .button-content{
-        margin: -33px;
-        color: white;
-    }
     
-}
+
 

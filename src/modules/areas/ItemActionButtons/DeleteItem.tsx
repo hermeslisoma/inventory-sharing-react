@@ -3,8 +3,15 @@
 import React, { Component } from 'react'
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import { connect } from 'react-redux';
-
- class DeleteItem extends Component <any,any>{
+import { IStateItem, IStoreState } from '../../../reducers/globalState.models.';
+import{deleteItemAction} from '../../../actions/item.actions'
+interface myProps {
+    item:IStateItem,
+    className:string,
+    deleteItemAction:any
+    
+}
+ class DeleteItem extends Component <myProps,any>{
     state = {
         modal:false
     }
@@ -15,7 +22,7 @@ import { connect } from 'react-redux';
       }
     deleteInventory=(e)=>{
         e.preventDefault();
-        //this.props.deleteInventoryAction(this.props.id)
+        this.props.deleteItemAction(this.props.item.id)
         this.toggle();
 
 
@@ -50,14 +57,14 @@ import { connect } from 'react-redux';
         )
     }
 }
-// export const mapDispatchProps = {
-   
-// }
-// const mapStateToProps = (state:)=>{
-//     return{
+export const mapDispatchProps = {
+   deleteItemAction
+}
+const mapStateToProps = (state:IStoreState)=>{
+    return{
        
-//     }
+    }
 
-// }
-export default connect()(DeleteItem)
+}
+export default connect(mapStateToProps,mapDispatchProps)(DeleteItem)
 

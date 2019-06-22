@@ -9,7 +9,7 @@ let initialState:IStateInventory = {
 }
 
 export const currentInventoryReducer = (state:IStateInventory = initialState, action) =>{
-    console.log(action.payload)
+    
     switch(action.type){
         case types.SET_CURRENT_INVENTORY:
             return{

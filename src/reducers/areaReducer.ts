@@ -8,20 +8,16 @@ let initialState:IStateArea[] = []
 export default function(state:IStateArea[] = initialState, action:any) {
   let payload = action.payload;
   let newState:IStateArea[]=[];
-  let id:number,AreaId:number,itemId:number = undefined;
+  let id:number,areaId:number,itemId:number = undefined;
   let item:IStateItem = undefined;
-  console.log('reducer in Area:',payload)
 //   console.log(payload)
   switch(action.type) {
     case types.SET_AREAS:
-        newState = payload;//this step is just to verify the type of the payload before set up the state
-        console.log('new state::::',newState)
-        // console.log(`newstate: ${newState[0]}`)
-        let stat = [...newState]
+        newState = payload;
         return [...newState];
 
     case types.CREATE_AREA:
-            let newArea:IStateArea = payload.area;
+            let newArea:IStateArea = payload.newArea;
         return [...state,newArea];
 
     case types.UPDATE_AREA:
@@ -30,7 +26,7 @@ export default function(state:IStateArea[] = initialState, action:any) {
         return [...newState ];
 
     case types.DELETE_AREA:
-            id = payload;
+            id = payload.id;
             newState = [...state].filter((a:IStateArea)=>a.id!==id);
         return [...newState ];
         
@@ -38,7 +34,7 @@ export default function(state:IStateArea[] = initialState, action:any) {
         return []; 
 
     case types.DELETE_ITEM:
-        itemId = payload;
+        itemId = payload.id;
 
         newState = [...state].map((a:IStateArea)=>{
             a.items= [...a.items].filter((item:IStateItem)=>item.id!==itemId);
@@ -46,13 +42,16 @@ export default function(state:IStateArea[] = initialState, action:any) {
         });
 
         return [...newState];
-    case types.CREATE_ITEM:
-        item = payload.Item;
-        AreaId = payload.AreaId;
 
+    case types.CREATE_ITEM:
+        let newitem = {
+            id:payload.item.id,
+            name:payload.item.name
+        };
+        areaId = payload.areaId;
         newState = [...state].map((a:IStateArea)=>{
-            if(a.id===AreaId){
-                a.items = [...a.items,item];
+            if(a.id===areaId){
+                a.items = [...a.items,newitem];
             }
             return a;
         });

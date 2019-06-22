@@ -1,18 +1,15 @@
 import React, { Component } from 'react'
 import { Link, RouteComponentProps } from 'react-router-dom';
 import './Areas.scss'
-import {Button} from 'reactstrap'
 import AddArea from './AddArea';
-import  AddItem  from './AddItem';
-import EditButton from './ActionButtons/EditButton';
-import DeleteButton from './ActionButtons/DeleteButton';
+import  AddItem  from './AreaActionButtons/AddItem';
 import { IStoreState, ILoginState, IStateArea, IStateInventory, ICurrentAreaState } from '../../reducers/globalState.models.';
 import { connect } from 'react-redux';
-import {Spinner} from 'reactstrap'
-// import { mapDispatchProps } from '../inventory/ActionsButtons/ShareButton';
-import { statement } from '@babel/template';
 import { getAreasByInventoryIdAction, setCurrentAreaAction } from '../../actions/area.action'
-import  UpdateArea  from './UpdateArea';
+import  UpdateArea  from './AreaActionButtons/UpdateArea';
+import UpdateItem from './ItemActionButtons/UpdateItem';
+import DeleteItem from './ItemActionButtons/DeleteItem';
+import DeleteArea from './AreaActionButtons/DeleteArea';
 
 
 
@@ -21,22 +18,11 @@ interface IAreaProps extends RouteComponentProps{
     listAreaState:IStateArea[],
     getAreasByInventoryIdAction:any,
     inventoryState: IStateInventory,
-    setCurrentAreaAction:any
+    
     
 }
 export class Areas extends Component<IAreaProps, any> {
 
-
-    setArea = (a)=>{
-        console.log(a)
-        let area:ICurrentAreaState = {
-            id:a.id,
-            name:a.name,
-            description: a.description
-        }
-        this.props.setCurrentAreaAction(area)
-        console.log(`area set`)
-    }
 
     componentDidMount = async ()=>{
         if(this.props.loginState.isAuthenticated){
@@ -58,24 +44,39 @@ export class Areas extends Component<IAreaProps, any> {
         let lst
         if (this.props.listAreaState != undefined){
             // console.log('ready to print',[...this.props.listAreaState]) 
-            lst = [...this.props.listAreaState].map((i:IStateArea)=>
+            lst = [...this.props.listAreaState].map((a:IStateArea)=>
                 (
-                <div key ={i.id} className="card card-container">
+                <div key ={a.id} className="card card-container">
                     <div className="card-header d-flext pt-3">
-                        <h5 className="card-title mr-auto"> {i.name}</h5>
-                        <p className="card-text">{i.description}</p>
-                        <UpdateArea className="modalAddInventory"/>
-                        <AddItem className="modalAddInventory"/>
-                        <Button className="far fa-smile text-warning" onClick={() => {this.setArea(i)}}>Select Area</Button>
+                        <h5 className="card-title mr-auto"> {a.name}</h5>
+                        <p className="card-text">{a.description}</p>
+                        <div className="d-flex justify-content-around">
+                            <div className="btn-group" role="group">
+                                <button id="btnGroupDrop1" type="button" className="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i className="fas fa-cog"></i>
+                                </button>
+                                <div className="dropdown-menu dropdown-menu-Area" aria-labelledby="btnGroupDrop1">
+                                    <div className="d-flex flex-column ">
+                                        <UpdateArea area = {a}  className="updateArea"/>
+                                        <DeleteArea area = {a} className = "deleteArea"/>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                            <AddItem area = {a} className="addItem"/>
+                        </div>
+                        
+                        
                         
                     </div>
                     <div className="card-body">
-                        {i.items[0] && i.items.map((item) => (
+                        {a.items[0] && a.items.map((item) => (
                             <div key = {item.id} className="item">
                                 <div className="d-flex align-items-center ">
                                     {item.name}
                                     <div className="ml-auto d-flex align-items-center my-3">
-                                        <EditButton/><DeleteButton/>        
+                                        <UpdateItem item = {item} area = {a} className="updateItem"/>
+                                        <DeleteItem item = {item} className="deleteItem" />        
                                     </div>
                                 </div>
                             </div>
@@ -86,7 +87,6 @@ export class Areas extends Component<IAreaProps, any> {
                 )
             )
         }
-        console.log(`lst: ${lst}`)
         return (
             <div className='container Inventories-container mt-5'>
                 <div className="header d-flex flex-row">
@@ -113,8 +113,7 @@ const mapStateToProps = (state:IStoreState) =>{
 }
 
 const mapDispatchToProps = {
-    getAreasByInventoryIdAction: getAreasByInventoryIdAction,
-    setCurrentAreaAction: setCurrentAreaAction
+    getAreasByInventoryIdAction: getAreasByInventoryIdAction
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Areas);
