@@ -4,6 +4,7 @@ import { Button, Modal, ModalHeader, ModalBody } from 'reactstrap';
 import { connect } from 'react-redux';
 import { PermissionService } from '../../../services/permissionService';
 import { IStateInventory } from '../../../reducers/globalState.models.';
+import { UserService } from '../../../services/userService';
 
 interface myProps{
   inventory:IStateInventory,
@@ -36,6 +37,21 @@ export default class ShareButton extends Component<myProps,any> {
         
 
     }
+    shareWithAll = async (e:SyntheticEvent)=>{
+      e.preventDefault()
+      let userService = new UserService()
+      let usernames = await userService.getAllUsers();
+      let permissionService = new PermissionService()
+      console.log(usernames)
+      let inventory = this.props.inventory;
+
+      usernames.forEach(async element => {
+        // console.log(element.username)
+        let response = await permissionService.sharePermissionToUser(inventory, element.username)
+        console.log('response:::::', response)
+      });
+      this.toggle()
+    }
     toggle = () =>{
         this.setState(prevState => ({
           modal: !prevState.modal
@@ -62,6 +78,7 @@ export default class ShareButton extends Component<myProps,any> {
                     />
                     </div>
                     <Button className='btn btn-block ' type='submit' color="primary" >Share with this user</Button>
+                    <Button className='btn btn-block' type='button' color="success" onClick={this.shareWithAll}>Make Public</Button>
 
 
                 </form>

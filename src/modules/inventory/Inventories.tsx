@@ -57,7 +57,6 @@ class Inventories extends Component<myProps, any> {
                                 <DeleteInventory className="text-danger" inventory = {i}/>
 
                             </div>
-                            
                             <p className="card-text">{i.description}</p>
                             <button className="btn btn-warning" onClick={
                                 ()=>this.areaLink(i)}>see Inventory</button>

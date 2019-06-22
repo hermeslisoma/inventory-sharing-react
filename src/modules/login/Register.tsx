@@ -64,7 +64,7 @@ export default class RegisterUser extends Component<any,any> {
                     <div className="circle">
                     <span className="icon arrow"></span>
                     </div>
-                    <p className="button-text"><span className='sign-up-botton'><span className="button-content">Sing up</span></span></p>
+                    <p className="button-text"><span className='sign-up-botton'><span className="button-content">Sign up</span></span></p>
                 </button>
             </div>
           <Modal isOpen={this.state.modal} fade={false} toggle={this.toggle} className={this.props.className}>
