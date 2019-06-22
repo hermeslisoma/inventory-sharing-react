@@ -52,7 +52,7 @@ class Inventories extends Component<myProps, any> {
                         <div className="card-body">
                             <h5 className="card-title"> {i.name}</h5>
                             <div className="actions my-2 d-flex justify-content-around align-items-center">
-                                <ShareButton className="text-primary" inventory = {i} />
+                                <ShareButton className="text-primary" inventory = {i}  currentUser = {this.props.loginState.currentUser}/>
                                 <EditButton  className="text-warning" inventory = {i}  />
                                 <DeleteInventory className="text-danger" inventory = {i}/>
 

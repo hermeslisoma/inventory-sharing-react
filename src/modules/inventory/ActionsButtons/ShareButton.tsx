@@ -3,12 +3,13 @@ import React, { Component, SyntheticEvent } from 'react'
 import { Button, Modal, ModalHeader, ModalBody } from 'reactstrap';
 import { connect } from 'react-redux';
 import { PermissionService } from '../../../services/permissionService';
-import { IStateInventory } from '../../../reducers/globalState.models.';
+import { IStateInventory, ILoginState } from '../../../reducers/globalState.models.';
 import { UserService } from '../../../services/userService';
 
 interface myProps{
   inventory:IStateInventory,
-  className:string
+  className:string,
+  currentUser:any
 }
 export default class ShareButton extends Component<myProps,any> {
     state = {
@@ -47,8 +48,12 @@ export default class ShareButton extends Component<myProps,any> {
 
       usernames.forEach(async element => {
         // console.log(element.username)
-        let response = await permissionService.sharePermissionToUser(inventory, element.username)
-        console.log('response:::::', response)
+        if(element.username !== this.props.currentUser.username){
+          let response = await permissionService.sharePermissionToUser(inventory, element.username)
+          // console.log(this.props.currentUser.username)
+          // console.log(element.username)
+          console.log('response:::::', response)
+        }
       });
       this.toggle()
     }
