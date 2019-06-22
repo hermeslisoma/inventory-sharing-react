@@ -24,22 +24,12 @@ interface IAreaProps extends RouteComponentProps{
 }
 export class Areas extends Component<IAreaProps, any> {
 
-    areas = () =>{
-        let invId = this.props.inventoryState.id
-        this.props.getAreasByInventoryIdAction(invId)
-        console.log('area state::',this.props.listAreaState)
-
-    }
 
     componentDidMount = async ()=>{
         if(this.props.loginState.isAuthenticated){
-            // console.log(this.props.inventoryState.id)
-            // let invId = this.props.inventoryState.id;
-            // console.log(invId)
-            // console.log('component did mount::', this.props.listAreaState[0])
-            // this.props.getAreasByInventoryIdAction(invId);
-            // console.log(this.props.listAreaState)
-            this.areas()
+            
+            let invId = this.props.inventoryState.id
+            this.props.getAreasByInventoryIdAction(invId)
             
         }else{
             console.log(`i'm not authenticated`)
@@ -52,7 +42,6 @@ export class Areas extends Component<IAreaProps, any> {
         // this.areas()
     }
     render() {
-        this.areas()
         let lst
         if (this.props.listAreaState != undefined){
             // console.log('ready to print',[...this.props.listAreaState]) 
@@ -67,8 +56,7 @@ export class Areas extends Component<IAreaProps, any> {
                         
                     </div>
                     <div className="card-body">
-                        {console.log(i.items)}
-                        {i.items.map((item) => (
+                        {i.items[0] && i.items.map((item) => (
                             <div key = {item.id} className="item">
                                 <div className="d-flex align-items-center ">
                                     {item.name}
@@ -93,7 +81,7 @@ export class Areas extends Component<IAreaProps, any> {
                 </div>
                 
                 <div className="inventories-container p-3">
-                        {(this.props.listAreaState[0] && lst ) || <Spinner color="success" />}
+                        {(this.props.listAreaState[0] && lst ) || <span className="lead">No Areas in this inventory yet.</span>}
                 </div>
             </div>
         )

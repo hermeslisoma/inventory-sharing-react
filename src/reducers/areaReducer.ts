@@ -21,8 +21,8 @@ export default function(state:IStateArea[] = initialState, action:any) {
         return [...newState];
 
     case types.CREATE_AREA:
-            let newArea:IStateArea = payload;
-        return [...state];
+            let newArea:IStateArea = payload.area;
+        return [...state,newArea];
 
     case types.UPDATE_AREA:
             let Area:IStateArea = payload;

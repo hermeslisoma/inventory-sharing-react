@@ -25,7 +25,6 @@ class Inventories extends Component<myProps, any> {
     areaLink = (id) =>{
         this.props.setCurrentInventoryAction(id)
         this.props.history.push('/areas')
-        return(console.log('woo'))
     }
 
             componentDidMount(){
@@ -75,7 +74,7 @@ class Inventories extends Component<myProps, any> {
                 </div>
                 
                 <div className="inventories-container p-3">
-                        {(this.props.listInventoryState[0] && list ) || <Spinner color="success" />
+                        {(this.props.listInventoryState[0] && list ) || <span className="lead">No inventories found, add one</span>
                         }
                 </div>
             </div>

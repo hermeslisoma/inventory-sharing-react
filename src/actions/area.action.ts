@@ -1,6 +1,7 @@
 import * as types from './all.type.actions';
 import { AreaService } from '../services/areaService';
 import { IStateArea } from '../reducers/globalState.models.';
+import { IsOptional } from 'prop-types';
 
 
 export const deleteAreaAction = (id:number) => async dispatch => {
@@ -55,9 +56,11 @@ export const updateareaAction = (id:number,area:IStateArea) => async dispatch =>
 
 };
 export const createAreaAction = (area) => async dispatch => {
+    
     try{
         let areaService = new AreaService();
         let response = await areaService.addArea(area);
+
         if(response.status === 401){//if user pass is wrong
             //send info to the reducer
             dispatch({
@@ -65,6 +68,8 @@ export const createAreaAction = (area) => async dispatch => {
                 type: types.UNAUTHORIZED
             })
         } else if ( response.status === 200){
+            let newArea:IStateArea;
+            newArea.id = response.
             dispatch({
                 payload:{
                     area
@@ -83,23 +88,27 @@ export const getAreasByInventoryIdAction = (inventoryId:number) => async dispatc
     try{
         let areaService = new AreaService();
         let response = await areaService.getAreasByInventoryID(inventoryId);
-        console.log(`data: ${response.data}`)
-        if(response.status === 401){//if user pass is wrong
-            //send info to the reducer
+        
+        if(response.status == 401){
             dispatch({
-                //with a type of INVALID CREDENTIALS
                 type: types.UNAUTHORIZED
             })
-        } else if ( response.status === 200){
+        } else {
             const data:IStateArea[] = response.data
-            console.log(`data2 electic boogaloo: ${data[0].items}`)
-            dispatch({
-                payload:[
-                    ...data
-                ],
-                type:types.SET_AREAS
-            })
-            //history.push('/myinventories')
+            if((response.data.length == 0)){
+                dispatch({
+                    type:types.CLEAR_AREAS
+                })
+            }else{
+
+                dispatch({
+                    payload:data,
+                    type:types.SET_AREAS
+                })
+
+            }
+            
+            
             
         }
       
