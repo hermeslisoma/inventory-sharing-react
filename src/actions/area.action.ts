@@ -1,6 +1,6 @@
 import * as types from './all.type.actions';
 import { AreaService } from '../services/areaService';
-import { IStateArea } from '../reducers/globalState.models.';
+import { IStateArea, ICurrentAreaState } from '../reducers/globalState.models.';
 
 
 export const deleteAreaAction = (id:number) => async dispatch => {
@@ -28,10 +28,10 @@ export const deleteAreaAction = (id:number) => async dispatch => {
     }
 
 };
-export const updateareaAction = (id:number,area:IStateArea) => async dispatch => {
+export const updateAreaAction = (area) => async dispatch => {
     try{
         let areaService = new AreaService();
-        let response = await areaService.Update(id,area);
+        let response = await areaService.updateArea(area);
         if(response.status === 401){//if user pass is wrong
             //send info to the reducer
             dispatch({
@@ -39,10 +39,10 @@ export const updateareaAction = (id:number,area:IStateArea) => async dispatch =>
                 type: types.UNAUTHORIZED
             })
         } else if ( response.status === 200){
+            let updatedArea = response.data
             dispatch({
                 payload:{
-                    id,
-                    area
+                    updatedArea
                 },
                 type:types.UPDATE_AREA
             })
@@ -65,9 +65,10 @@ export const createAreaAction = (area) => async dispatch => {
                 type: types.UNAUTHORIZED
             })
         } else if ( response.status === 200){
+            let newArea = response.data
             dispatch({
                 payload:{
-                    area
+                    newArea
                 },
                 type:types.CREATE_AREA
             })
@@ -108,4 +109,19 @@ export const getAreasByInventoryIdAction = (inventoryId:number) => async dispatc
     }
 
 };
+
+export const setCurrentAreaAction = (area) => dispatch => {
+    // try{
+        // let inventoryService = new InventoryService()
+        // let response = await inventoryService.getInventoryById(inv)
+        console.log(area.name)
+            const currentArea:ICurrentAreaState = area
+            dispatch({
+                payload:{
+                    currentArea
+                },
+                type:types.SET_CURRENT_AREA
+            })
+        }
+
 

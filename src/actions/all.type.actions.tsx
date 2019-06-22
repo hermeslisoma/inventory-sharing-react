@@ -28,6 +28,8 @@ export const CLEAR_AREAS = 'CLEAR_AREAS';
 export const UPDATE_AREA = 'UPDATE_AREA';
 export const CREATE_AREA = 'CREATE_AREA';
 export const DELETE_AREA = 'DELETE_AREA';
+export const SET_CURRENT_AREA = 'SET_CURRENT_AREA';
+export const CLEAR_CURRENT_AREA = 'CLEAR_CURRENT_AREA';
 
 //ITEMS ACTIONS
 export const UPDATE_ITEM = 'UPDATE_ITEM';

@@ -20,7 +20,7 @@ export const currentInventoryReducer = (state:IStateInventory = initialState, ac
             }
         case types.CLEAR_CURRENT_INVENTORY:
             return{
-                ...state
+                ...initialState
             }
     }
     return{
