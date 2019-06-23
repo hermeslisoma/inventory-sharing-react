@@ -10,7 +10,15 @@ import { IStateItem } from "../reducers/globalState.models.";
   }
 
 
-
+  updateItem = (T)=>{
+    // console.log('inside the service update url::',`${this.url}/${id}`,T)
+    return axios.patch(`${this.url}`,T, {headers: this.getHeaders()})
+                .then(resp => {
+                  return resp;
+                }).catch(error => {
+                  return error.response
+                });
+  }
 
 
 

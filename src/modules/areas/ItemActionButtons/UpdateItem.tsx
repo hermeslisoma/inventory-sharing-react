@@ -22,10 +22,15 @@ class UpdateItem extends Component<myProps,any> {
 
 
     }
-    updateItem = ()=>{
+    updateItem = (event)=>{
+      event.preventDefault()
         let item = {
-            title:this.titleRef.value,
+            id: this.props.item.id,
+            name:this.titleRef.value
         }
+        this.props.updateItemAction(item)
+        this.toggle()
+
 
     }
     toggle = () =>{
