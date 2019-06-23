@@ -30,7 +30,7 @@ export const deleteItemAction = (id:number) => async dispatch => {
 export const updateItemAction = (Item:IStateItem) => async dispatch => {
     try{
         let itemService = new ItemService();
-        let response = await itemService.Update(Item.id,Item);
+        let response = await itemService.updateItem(Item);
         if(response.status === 401){//if user pass is wrong
             //send info to the reducer
             dispatch({
