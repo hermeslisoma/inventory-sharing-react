@@ -1,7 +1,7 @@
 
 
 import React, { Component } from 'react'
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import { Button, Modal, ModalHeader, ModalBody } from 'reactstrap';
 import { connect } from 'react-redux';
 import { IStateItem, IStoreState } from '../../../reducers/globalState.models.';
 import{deleteItemAction} from '../../../actions/item.actions'

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Button, Modal, ModalHeader, ModalBody } from 'reactstrap';
 import { connect } from 'react-redux';
-import { IStoreState, IStateInventory, ILoginState, ICurrentAreaState, IStateArea } from '../../../reducers/globalState.models.';
+import { IStoreState, IStateArea } from '../../../reducers/globalState.models.';
 import { updateAreaAction } from '../../../actions/area.action';
 import { Area } from '../../../services/models/Models';
 
@@ -81,7 +81,7 @@ export class UpdateArea extends Component<myProps,any> {
                             defaultValue = {this.props.area.description}
                     />
                     </div>
-                    <Button className='btn btn-block ' type='submit' color="primary" >Update Area</Button>
+                    <Button className='btn btn-block ' type='submit' color="warning" >Update Area</Button>
 
 
                 </form>

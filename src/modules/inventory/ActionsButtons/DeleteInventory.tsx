@@ -1,16 +1,17 @@
 
 
 import React, { Component } from 'react'
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import { Button, Modal, ModalHeader, ModalBody } from 'reactstrap';
 import { connect } from 'react-redux';
-import { IStoreState, IStateInventory } from '../../../reducers/globalState.models.';
+import { IStoreState, IStateInventory, ILoginState } from '../../../reducers/globalState.models.';
 import {deleteInventoryAction} from '../../../actions/inventory.actions'
 
 
 interface myProps{
     inventory:IStateInventory,
     deleteInventoryAction:(inventoryid:number)=>{},
-    className:string
+    className:string,
+    loginState:ILoginState
 }
  class DeleteInventory extends Component <myProps,any>{
     state = {
@@ -63,6 +64,7 @@ export const mapDispatchProps = {
 }
 const mapStateToProps = (state:IStoreState)=>{
     return{
+        loginState:state.loginState
        
     }
 

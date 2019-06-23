@@ -5,6 +5,7 @@ import areaReducer from './areaReducer';
 import { loginReducer } from './loginReducer';
 import { currentInventoryReducer } from './currentInventoryReducer';
 import { currentAreaReducer } from './currentAreaReducer';
+import publicInventoryReducer from './publicInventoryReducer';
 
 const rootReducer = combineReducers({
     messageState: messageReducer,
@@ -12,7 +13,9 @@ const rootReducer = combineReducers({
     listAreaState:areaReducer,
     loginState:loginReducer,
     currentInventoryState:currentInventoryReducer,
-    currentAreaState:currentAreaReducer
+    currentAreaState:currentAreaReducer,
+    listPublicInventoriesState:publicInventoryReducer
+
 });
 
 export default rootReducer;

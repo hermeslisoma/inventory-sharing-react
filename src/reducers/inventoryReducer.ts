@@ -23,7 +23,7 @@ export default function(state:IStateInventory[] = initialState, action:any) {
         return [...newState ];
 
     case types.DELETE_INVENTORY:
-            let id:number = payload.id;
+            let id:number = payload.inventoryId;
             newState = [...state].filter((i:IStateInventory)=>i.id!==id);
         return [...newState ];
         

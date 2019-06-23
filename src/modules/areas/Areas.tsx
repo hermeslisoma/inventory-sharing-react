@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
-import { Link, RouteComponentProps } from 'react-router-dom';
+import { RouteComponentProps } from 'react-router-dom';
 import './Areas.scss'
 import AddArea from './AddArea';
 import  AddItem  from './AreaActionButtons/AddItem';
-import { IStoreState, ILoginState, IStateArea, IStateInventory, ICurrentAreaState } from '../../reducers/globalState.models.';
+import { IStoreState, ILoginState, IStateArea, IStateInventory } from '../../reducers/globalState.models.';
 import { connect } from 'react-redux';
-import { getAreasByInventoryIdAction, setCurrentAreaAction } from '../../actions/area.action'
+import { getAreasByInventoryIdAction } from '../../actions/area.action'
 import  UpdateArea  from './AreaActionButtons/UpdateArea';
 import UpdateItem from './ItemActionButtons/UpdateItem';
 import DeleteItem from './ItemActionButtons/DeleteItem';
@@ -18,7 +18,7 @@ interface IAreaProps extends RouteComponentProps{
     listAreaState:IStateArea[],
     getAreasByInventoryIdAction:any,
     inventoryState: IStateInventory,
-    
+    currentInventoryState:IStateInventory
     
 }
 export class Areas extends Component<IAreaProps, any> {
@@ -42,7 +42,7 @@ export class Areas extends Component<IAreaProps, any> {
     }
     render() {
         let lst
-        if (this.props.listAreaState != undefined){
+        if (this.props.listAreaState !== undefined){
             // console.log('ready to print',[...this.props.listAreaState]) 
             lst = [...this.props.listAreaState].map((a:IStateArea)=>
                 (
@@ -50,6 +50,8 @@ export class Areas extends Component<IAreaProps, any> {
                     <div className="card-header d-flext pt-3">
                         <h5 className="card-title mr-auto"> {a.name}</h5>
                         <p className="card-text">{a.description}</p>
+                        
+                        {this.props.currentInventoryState.levelId === 1? 
                         <div className="d-flex justify-content-around">
                             <div className="btn-group" role="group">
                                 <button id="btnGroupDrop1" type="button" className="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -65,7 +67,7 @@ export class Areas extends Component<IAreaProps, any> {
                             </div>
                             <AddItem area = {a} className="addItem"/>
                         </div>
-                        
+                            : <></>}
                         
                         
                     </div>
@@ -73,11 +75,13 @@ export class Areas extends Component<IAreaProps, any> {
                         {a.items[0] && a.items.map((item) => (
                             <div key = {item.id} className="item">
                                 <div className="d-flex align-items-center ">
-                                    {item.name}
+                                    - {item.name}
+                                    {this.props.currentInventoryState.levelId === 1? 
                                     <div className="ml-auto d-flex align-items-center my-3">
                                         <UpdateItem item = {item} area = {a} className="updateItem"/>
                                         <DeleteItem item = {item} className="deleteItem" />        
                                     </div>
+                                     : <></>}
                                 </div>
                             </div>
                         ))}
@@ -91,7 +95,9 @@ export class Areas extends Component<IAreaProps, any> {
             <div className='container Inventories-container mt-5'>
                 <div className="header d-flex flex-row">
                     <p className="display-4">{this.props.inventoryState.name}</p>
+                    {this.props.currentInventoryState.levelId === 1? 
                     <AddArea className="modalAddArea" buttonLabel='Add Area' />
+                    : <></>}
                 </div>
                 
                 <div className="inventories-container p-3">
@@ -108,7 +114,8 @@ const mapStateToProps = (state:IStoreState) =>{
     return {
         loginState: state.loginState,
         inventoryState: state.currentInventoryState,
-        listAreaState: state.listAreaState
+        listAreaState: state.listAreaState,
+        currentInventoryState:state.currentInventoryState
     }
 }
 

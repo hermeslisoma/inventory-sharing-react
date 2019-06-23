@@ -7,23 +7,6 @@ import { IStoreState } from '../../reducers/globalState.models.';
 import { login } from '../../actions/login.actions';
 import { RouteComponentProps } from 'react-router';
 import  RegisterUser from './Register';
-//import { RegisterUser } from './Register';
-// import { login } from '../../actions/login.actions';
-
-// interface MyProps extends RouteComponentProps {
-//     dispatch: any,
-//     history:any,
-//     location: any,
-//     loginState: ILoginState,
-//     match: any,
-//     staticContext:any,
-//     loginUserAction: (user: object) => any,
-//     updateState: (error: object) => any
-//   }
-// interface MyState {
-//   error:Object,
-//   messageFromApi:string
-// }
 
 interface ILoginProps extends RouteComponentProps{
     // currentUser: User
@@ -77,9 +60,6 @@ class Login extends Component<ILoginProps, any>{
                 password:'password is required'
             }})
         }else{
-            const data = {
-                    username, password
-            };
            // this.props.updateState()
            this.setState({...this.state,error:{...this.state.error,
                username:'',

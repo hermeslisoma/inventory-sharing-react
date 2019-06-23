@@ -45,6 +45,7 @@ export const updateAreaAction = (area:IStateArea) => async dispatch => {
         } else if ( response.status === 200){
             //we update this when the backend fix the response that it gives me
             let updatedArea = response.data
+            console.log('response from back update',response);
             dispatch({
                 payload:{
                     updatedArea
@@ -59,11 +60,21 @@ export const updateAreaAction = (area:IStateArea) => async dispatch => {
     }
 
 };
-export const createAreaAction = (area:Area) => async dispatch => {
+export const createAreaAction = (area:Area,inventoryId:number) => async dispatch => {
     
     try{
+        console.log('inside create area::',area)
         let areaService = new AreaService();
-        let response = await areaService.addArea(area);
+        let areaToSave = {
+            name:area.name,
+            description:area.description,
+            inventory:{
+                id:inventoryId
+
+            }
+		}
+        
+        let response = await areaService.addArea(areaToSave);
         if(response.status === 401){
             dispatch({
                 type: types.UNAUTHORIZED
@@ -94,13 +105,13 @@ export const getAreasByInventoryIdAction = (inventoryId:number) => async dispatc
         let areaService = new AreaService();
         let response = await areaService.getAreasByInventoryID(inventoryId);
         
-        if(response.status == 401){
+        if(response.status === 401){
             dispatch({
                 type: types.UNAUTHORIZED
             })
         } else {
             const data:IStateArea[] = response.data
-            if((response.data.length == 0)){
+            if((response.data.length === 0)){
                 dispatch({
                     type:types.CLEAR_AREAS
                 })
@@ -115,7 +126,7 @@ export const getAreasByInventoryIdAction = (inventoryId:number) => async dispatc
             
             
             
-        }
+        } 
       
     }  catch(err){
         console.log(err);      

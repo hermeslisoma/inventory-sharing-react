@@ -2,7 +2,7 @@ import React, { Component, SyntheticEvent } from 'react'
 import { Button, Modal, ModalHeader, ModalBody } from 'reactstrap';
 import { connect } from 'react-redux';
 import '../Areas.scss'
-import { IStateArea, IStateItem } from '../../../reducers/globalState.models.';
+import { IStateArea } from '../../../reducers/globalState.models.';
 import {addItemAction} from '../../../actions/item.actions'
 interface myProps {
   area:IStateArea,
@@ -61,7 +61,7 @@ export class AddItem extends Component<myProps,any> {
                             ref = {input=>this.nameRef = input}
                     />
                     </div>
-                    <Button className='btn btn-block ' type='submit' color="primary" >Add Item</Button>
+                    <Button className='btn btn-block ' type='submit' color="success" >Add Item</Button>
 
 
                 </form>

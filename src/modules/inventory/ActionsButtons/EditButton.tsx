@@ -32,6 +32,7 @@ class EditButton extends Component<myProps,any> {
             id:this.props.inventory.id,
             name:this.nameRef.value,
             description:this.descriptionRef.value,
+            levelId:this.props.inventory.levelId
         }
         this.props.updateInventoryAction(inventory.id,inventory);
         this.toggle();
@@ -42,7 +43,7 @@ class EditButton extends Component<myProps,any> {
         }));
       }
     render() {
-        const {id,name,description} = this.props.inventory;
+        const {name,description} = this.props.inventory;
         return (
             <div >
             <i className={`fas fa-edit ${this.props.className}`} onClick={this.toggle}></i>

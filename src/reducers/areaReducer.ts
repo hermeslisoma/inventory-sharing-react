@@ -21,8 +21,17 @@ export default function(state:IStateArea[] = initialState, action:any) {
         return [...state,newArea];
 
     case types.UPDATE_AREA:
-            let Area:IStateArea = payload;
-            newState = [...state].map((a:IStateArea)=>a.id===Area.id? Area:a);
+            let Area:IStateArea = payload.updatedArea;
+            newState = [...state].map((a:IStateArea)=>{
+                if(a.id===Area.id){
+                    a.description = Area.description;
+                    a.name = Area.name;
+                    return a
+
+                } 
+                return a
+            
+            });
         return [...newState ];
 
     case types.DELETE_AREA:

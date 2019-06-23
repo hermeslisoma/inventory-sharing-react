@@ -3,16 +3,18 @@ import { Button, Modal, ModalHeader, ModalBody } from 'reactstrap';
 import { connect } from 'react-redux';
 import { IStoreState, IStateInventory, ILoginState } from '../../reducers/globalState.models.';
 import { createAreaAction } from '../../actions/area.action';
-import { RouteComponentProps } from 'react-router';
 
 
-interface IAddProps extends RouteComponentProps{
-    inventoryState: IStateInventory,
+interface myProps {
+    currentInventoryState: IStateInventory,
     loginState:ILoginState,
-    createAreaAction:any
+    createAreaAction:any,
+    className:string,
+    buttonLabel:string
+
 }
 
-export class AddArea extends Component<any,any> {
+class AddArea extends Component<myProps,any> {
     state = {
         modal:false
     }
@@ -30,11 +32,10 @@ export class AddArea extends Component<any,any> {
         event.preventDefault()
         let area = {
             name:this.titleRef.value,
-            description:this.descriptionRef.value,
-            inventory:this.props.inventoryState
+            description:this.descriptionRef.value
         }
 
-        this.props.createAreaAction(area)
+        this.props.createAreaAction(area,this.props.currentInventoryState.id)
         this.toggle()
     }
     toggle = () =>{
@@ -92,7 +93,7 @@ export const mapDispatchProps = {
 const mapStateToProps = (state:IStoreState) =>{
     return {
         loginState: state.loginState,
-        inventoryState: state.currentInventoryState
+        currentInventoryState: state.currentInventoryState
     }
 }
 

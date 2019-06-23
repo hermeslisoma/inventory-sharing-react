@@ -2,6 +2,7 @@
 import axios from 'axios';
 import { BaseService } from './baseService';
 import { IStateInventory } from "../reducers/globalState.models.";
+import { InventoryToSend } from './models/Models';
 
  export class InventoryService extends BaseService<IStateInventory>{
 
@@ -19,8 +20,12 @@ getInventoriesByUserID =(inventoryId:number)=> {
                  });
   }
   saveInventoryByUserId =(userId:number,inventory:IStateInventory)=> {
-   
-    return axios.post(`${this.url}/users/${userId}`,inventory, {headers: this.getHeaders()})
+    let inventoryToSend:InventoryToSend = {
+      id:inventory.id,
+      name:inventory.name,
+      description:inventory.description
+    }
+    return axios.post(`${this.url}/users/${userId}`,inventoryToSend, {headers: this.getHeaders()})
                  .then(resp => {
                    console.log("this is the respoinse for the inventory::",resp)
                    return resp;

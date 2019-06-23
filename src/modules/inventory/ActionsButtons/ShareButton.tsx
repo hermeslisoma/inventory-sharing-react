@@ -1,15 +1,15 @@
 
 import React, { Component, SyntheticEvent } from 'react'
 import { Button, Modal, ModalHeader, ModalBody } from 'reactstrap';
-import { connect } from 'react-redux';
 import { PermissionService } from '../../../services/permissionService';
-import { IStateInventory, ILoginState } from '../../../reducers/globalState.models.';
-import { UserService } from '../../../services/userService';
+import { IStateInventory,} from '../../../reducers/globalState.models.';
+import MakePublic from './MakePublic';
 
 interface myProps{
   inventory:IStateInventory,
   className:string,
-  currentUser:any
+  currentUser:any,
+  figure:string
 }
 export default class ShareButton extends Component<myProps,any> {
     state = {
@@ -30,32 +30,13 @@ export default class ShareButton extends Component<myProps,any> {
         let username= this.usernameRef.value;
         let inventory = this.props.inventory;
         let  permissionService = new PermissionService();
-        let response = await permissionService.sharePermissionToUser(inventory,username);
+        let response = await permissionService.sharePermissionToUser(inventory,username,1);
         //TODO:: use the response to let the user success or failure or user not found in database
         //        
         console.log('this is the response::',response);
         this.toggle();
         
 
-    }
-    shareWithAll = async (e:SyntheticEvent)=>{
-      e.preventDefault()
-      let userService = new UserService()
-      let usernames = await userService.getAllUsers();
-      let permissionService = new PermissionService()
-      console.log(usernames)
-      let inventory = this.props.inventory;
-
-      usernames.forEach(async element => {
-        // console.log(element.username)
-        if(element.username !== this.props.currentUser.username){
-          let response = await permissionService.sharePermissionToUser(inventory, element.username)
-          // console.log(this.props.currentUser.username)
-          // console.log(element.username)
-          console.log('response:::::', response)
-        }
-      });
-      this.toggle()
     }
     toggle = () =>{
         this.setState(prevState => ({
@@ -65,7 +46,7 @@ export default class ShareButton extends Component<myProps,any> {
     render() {
         return (
             <div >
-            <i className={`fas fa-share-alt ${this.props.className}`}  onClick={this.toggle}></i>
+            <i className={`${this.props.figure} ${this.props.className}`}  onClick={this.toggle}></i>
           <Modal isOpen={this.state.modal} fade={false} toggle={this.toggle} >
             <ModalHeader toggle={this.toggle}>Share with a user</ModalHeader>
             <ModalBody>
@@ -82,11 +63,14 @@ export default class ShareButton extends Component<myProps,any> {
                             ref = {input=>this.usernameRef = input}
                     />
                     </div>
-                    <Button className='btn btn-block ' type='submit' color="primary" >Share with this user</Button>
-                    <Button className='btn btn-block' type='button' color="success" onClick={this.shareWithAll}>Make Public</Button>
-
-
+                    <Button className='btn btn-block  ' type='submit' color="primary" >Share with this user</Button>
+                    
                 </form>
+                <div className="d-flex justify-content-center my-3">
+                        <MakePublic inventory = {this.props.inventory} 
+                                  currentUser= {this.props.currentUser} 
+                                  figure= {this.props.figure} className="text-danger" toggleFather = {this.toggle}/>
+                    </div>
                 
             </ModalBody>
           </Modal>

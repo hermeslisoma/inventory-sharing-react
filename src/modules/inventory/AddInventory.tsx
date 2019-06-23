@@ -31,8 +31,9 @@ class AddInventory extends Component<MyProps,any> {
         let inventory = {
             name:this.titleRef.value,
             description:this.descriptionRef.value,
+            levelId:1,
+            
         }
-        
         this.props.saveInventoryByUserIdAction(inventory,this.props.loginState.currentUser.id);
         this.toggle();
 
@@ -74,7 +75,7 @@ class AddInventory extends Component<MyProps,any> {
                             ref={input=>this.descriptionRef= input}
                     />
                     </div>
-                    <Button className='btn btn-block ' type='submit' color="primary" >Create Inventory</Button>
+                    <Button className='btn btn-block ' type='submit' color="dark" >Create Inventory</Button>
 
 
                 </form>

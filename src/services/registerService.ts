@@ -1,9 +1,7 @@
 
 import axios from "axios";
 import { BaseService } from './baseService';
-import { IStateInventory, ILoginState } from "../reducers/globalState.models.";
-import base64 from 'base-64'
-import { User } from "./models/loginModel";
+import { ILoginState } from "../reducers/globalState.models.";
 
  export class RegisterService extends BaseService<ILoginState>{
 

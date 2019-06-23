@@ -1,8 +1,6 @@
 import React, { Component } from 'react'
 import { Button, Modal, ModalHeader, ModalBody } from 'reactstrap';
-import { connect } from 'react-redux';
 import { RegisterService } from '../../services/registerService';
-import { register } from '../../actions/login.actions';
 import './register.scss'
 
 export default class RegisterUser extends Component<any,any> {

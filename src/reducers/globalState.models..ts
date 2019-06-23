@@ -1,18 +1,19 @@
 import { User } from "../services/models/loginModel";
 
 export interface IStoreState{
+  listPublicInventoriesState:IStateInventory[];
   listInventoryState:IStateInventory[],
   listAreaState:IStateArea[],
   messageState:IMessageState,
   loginState: ILoginState,
-  currentInventoryState: IStateInventory,
-  currentAreaState: ICurrentAreaState
+  currentInventoryState: IStateInventory
 }
 
 export interface IStateInventory{
   id:number;
   name:string;
   description:string;
+  levelId:number
 }
 export interface IStateArea{
   id:number;

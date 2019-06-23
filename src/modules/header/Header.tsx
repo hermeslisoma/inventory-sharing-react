@@ -64,12 +64,12 @@ class Header extends Component<MyProps,any>{
             <div className = "header-container" >
         <Navbar color="faded" light expand="sm">
           <NavbarBrand to ='/' className="mr-auto"><img className="img-fluid" src=""  height='50px' width='50px' alt=""/> </NavbarBrand>
-          
+          <span className="displayName">Welcome,  {this.props.loginState.currentUser.firstname.toUpperCase()}</span> 
           <NavbarToggler onClick={this.toggleNavbar} className="mr-2" />
           <Collapse isOpen={!this.state.collapsed} navbar>
           <Nav navbar >
                 <NavItem className="nav-item">
-                    <Link to ='/home' className="nav-link">Home</Link>
+                    <Link to ='/world' className="nav-link">World</Link>
                 </NavItem>
                 <NavItem className="nav-item">
                     <Link to ='/inventories' className="nav-link">Inventory</Link>

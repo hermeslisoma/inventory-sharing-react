@@ -8,3 +8,8 @@ id:number;
 name:string;
 description:string;
 }
+export interface InventoryToSend {
+  id:number,
+  name:string,
+  description:string
+}

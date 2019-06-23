@@ -1,25 +1,22 @@
 import React, { Component } from 'react'
 import { RouteComponentProps } from 'react-router-dom';
-import './Inventories.scss'
-import AddInventory from './AddInventory';
-import ShareButton from './ActionsButtons/ShareButton';
-import EditButton from './ActionsButtons/EditButton';
-import DeleteInventory from './ActionsButtons/DeleteInventory';
+import '../inventory/Inventories.scss'
 import { connect } from 'react-redux';
 import { IStoreState, IStateInventory } from '../../reducers/globalState.models.';
 import { ILoginState } from '../../reducers/globalState.models.';
-import {getInventoriesByUserAction, setCurrentInventoryAction} from '../../actions/inventory.actions'
+import {getPublicInventoriesByUserAction, setCurrentInventoryAction} from '../../actions/inventory.actions';
+import GetInventory from './ActionButtons/GetInventory';
 
 interface myProps extends RouteComponentProps{
     loginState:ILoginState,
-    listInventoryState:IStateInventory[],
-    getInventoriesByUserAction:any
+    listPublicInventoryState:IStateInventory[],
+    getPublicInventoriesByUserAction:any
     setCurrentInventoryAction:any
     
 
 }
 
-class Inventories extends Component<myProps, any> {
+class World extends Component<myProps, any> {
 
     areaLink = (id) =>{
         this.props.setCurrentInventoryAction(id)
@@ -28,9 +25,8 @@ class Inventories extends Component<myProps, any> {
 
             componentDidMount(){
                 if(this.props.loginState.isAuthenticated){
-                    let userId:number = this.props.loginState.currentUser.id;
-                    console.log('component did mount::', this.props)
-                        this.props.getInventoriesByUserAction(userId);
+                    
+                        this.props.getPublicInventoriesByUserAction();
                     
                     
                 }else{
@@ -45,22 +41,18 @@ class Inventories extends Component<myProps, any> {
     render() {
 
         let list:any;
-            if (this.props.listInventoryState[0]){
-                console.log('ready to print',[...this.props.listInventoryState]) 
-                list = [...this.props.listInventoryState].map((i:IStateInventory)=>
+            if (this.props.listPublicInventoryState[0]){
+                console.log('ready to print',[...this.props.listPublicInventoryState]) 
+                list = [...this.props.listPublicInventoryState].map((i:IStateInventory)=>
                     (
                         <div key ={i.id} className="card card-container">
                         <div className="card-body">
                             <h5 className="card-title"> {i.name}</h5>
-                            {i.levelId===1? 
                             <div className="actions my-2 d-flex justify-content-around align-items-center">
-                                <ShareButton figure="fas fa-share-alt" className="text-primary" inventory = {i}  currentUser = {this.props.loginState.currentUser}/>
-                                <EditButton  className="text-warning" inventory = {i}  />
-                                <DeleteInventory className="text-danger" inventory = {i}/> 
+                                <GetInventory figure="far fa-arrow-alt-circle-down" className="text-info" inventory = {i}  currentUser = {this.props.loginState.currentUser}/>
                                 
 
                             </div>
-                            : <></>}
                             <p className="card-text">{i.description}</p>
                             <button className="btn btn-warning" onClick={
                                 ()=>this.areaLink(i)}>see Inventory</button>
@@ -72,12 +64,12 @@ class Inventories extends Component<myProps, any> {
         return (
             <div className='container Inventories-container mt-5'>
                 <div className="header d-flex flex-row">
-                    <p className="display-4">My inventories</p>
-                    <AddInventory className="modalAddInventory" buttonLabel='Add Inventory' />
+                    <p className="display-4">World inventories</p>
+                    
                 </div>
                 
                 <div className="inventories-container p-3">
-                        {(this.props.listInventoryState[0] && list ) || <span className="lead">No inventories found, add one</span>
+                        {(this.props.listPublicInventoryState[0] && list ) || <span className="lead">No inventories found, add one</span>
                         }
                 </div>
             </div>
@@ -88,13 +80,13 @@ const mapStateToProps = (state:IStoreState) =>{
     
     return {
         loginState: state.loginState,
-        listInventoryState: state.listInventoryState
+        listPublicInventoryState: state.listPublicInventoriesState
     }
 }
 
 const mapDispatchToProps = {
-    getInventoriesByUserAction,
+    getPublicInventoriesByUserAction,
     setCurrentInventoryAction
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Inventories);
+export default connect(mapStateToProps, mapDispatchToProps)(World);

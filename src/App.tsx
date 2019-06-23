@@ -6,7 +6,7 @@ import {BrowserRouter, Route,Switch} from 'react-router-dom'
 //Components
 import { Provider } from 'react-redux';
 import configureStore from './store/configureStore';
-import Home from './modules/home/Home';
+import World from './modules/world/World';
 import Login from './modules/login/Login';
 import Areas from './modules/areas/Areas';
 import Header from './modules/header/Header';
@@ -27,7 +27,7 @@ class App extends Component<any,any> {
               
               <Switch>
                   <Route exact path="/" component = { Login }/>
-                  <Route path ="/home" component = { Home }/>
+                  <Route path ="/world" component = { World }/>
                   <Route path = "/inventories" component = {Inventories}/>
                   <Route path = "/areas" component = {Areas}/>
                   <Route path="/" component = { () => <h1>not found</h1> }/>

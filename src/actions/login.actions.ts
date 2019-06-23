@@ -1,7 +1,6 @@
 
 import { LoginService } from '../services/loginService';
 import * as types from './all.type.actions';
-import { RegisterService } from '../services/registerService';
 
 export const logout = () => async(dispatch) =>{
     
