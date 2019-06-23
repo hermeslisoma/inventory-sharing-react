@@ -6,7 +6,7 @@ import { IStateItem } from '../reducers/globalState.models.';
 export const deleteItemAction = (id:number) => async dispatch => {
     try{
         let itemService = new ItemService();
-        let response = await itemService.Delete(id);
+        let response = await itemService.deleteItem(id);
         if(response.status === 401){
             dispatch({
                 
